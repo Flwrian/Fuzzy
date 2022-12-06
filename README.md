@@ -1,2 +1,0 @@
-# Fuzzy
-Site vitrine
