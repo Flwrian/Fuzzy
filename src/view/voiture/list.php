@@ -17,6 +17,7 @@
             echo "<p>Nombre de sièges : " . $v->getNbSieges() . "</p>";
             echo "<a href='frontController.php?action=read&immat=" . $immat . "'>Détails</a>";
             echo "<a href='frontController.php?action=delete&immat_id=" . $immat . "'>Supprimer</a>";
+            echo "<img src='../images/k.png' alt='Logo' class='coinIcon'>";
             echo "</div>";
         }
         echo "</div>";
