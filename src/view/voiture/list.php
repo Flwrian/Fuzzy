@@ -6,10 +6,11 @@
     </head>
     <body>
         <?php
+        echo "<div class='cards'>";
         foreach ($voitures as $v) {
             $immat = rawurlencode($v->getImmatriculation());
             // Div pour chaque voiture qui contient le détail de la voiture et le lien pour supprimer la voiture
-            echo "<div>";
+            echo "<div class='card'>";
             echo "<p>Immatriculation : " . $v->getImmatriculation() . "</p>";
             echo "<p>Marque : " . $v->getMarque() . "</p>";
             echo "<p>Couleur : " . $v->getCouleur() . "</p>";
@@ -18,6 +19,7 @@
             echo "<a href='frontController.php?action=delete&immat_id=" . $immat . "'>Supprimer</a>";
             echo "</div>";
         }
+        echo "</div>";
         ?>
     </body>
 </html>
