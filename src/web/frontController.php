@@ -1,5 +1,5 @@
 <?php
-
+ini_set('display_errors', 'on');
 use App\Covoiturage\Lib\Psr4AutoloaderClass;
 require_once __DIR__ . '/../Lib/Psr4AutoloaderClass.php';
 
