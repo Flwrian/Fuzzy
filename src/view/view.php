@@ -17,10 +17,16 @@
                   <input type='hidden' name='action' value='search'>
                   <button type="submit" name="submit-search">Search</button>
                </form>
-               <!-- Connect button -->
-               <a href="connect.php" class="connect">Connect</a>
-               <!-- Cart button -->
-               <a href="cart.php" class="cart">Cart</a>
+               <!-- rectangle with profile.png img and connect button -->
+               <a href="login.php" class="connectA">
+                   <img src="../images/profile.png" alt="Se connecter" class="connect">
+                   <span>Se connecter</span>
+               </a>
+                <!-- Cart button -->
+                <a href="cart.php" class="cartA">
+                     <img src="../images/cart.png" alt="Panier" class="cart">
+                     <span>Panier</span>
+                </a>
             </nav>
       </header>
       <wrap>

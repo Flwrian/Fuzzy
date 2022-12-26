@@ -130,6 +130,54 @@ footer{
     border: 1px solid black;
 }
 
+.connectA {
+    background-color: #639FAB;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    text-decoration: none;
+}
+
+.connectA > * {
+    padding: 1px;
+}
+
+.connectA > span {
+    color: white;
+    font-family: "Open Sans", sans-serif;
+    font-size: 17px;
+}
+
+.cartA {
+    background-color: #639FAB;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    text-decoration: none;
+}
+
+.cartA > * {
+    padding: 1px;
+}
+
+.cartA > span {
+    color: white;
+    font-family: "Open Sans", sans-serif;
+    font-size: 17px;
+}
+
+.connect {
+    scale: 0.75;
+}
+
+.cart {
+    scale: 0.75;
+}
+
 
 
 
