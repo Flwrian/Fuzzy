@@ -45,6 +45,28 @@ class ArticleRepository {
         }
     }
 
+    public static function getArticlesByQuery(string $query) : array {
+        $sql = "SELECT * from ArticleFuzzy WHERE nom LIKE :query OR marque LIKE :query";
+        // Préparation de la requête
+        $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
+    
+        $values = array(
+            "query" => "%" . $query . "%",
+            //nomdutag => valeur, ...
+        );
+        // On donne les valeurs et on exécute la requête
+        $pdoStatement->execute($values);
+    
+        // On récupère les résultats comme précédemment
+        // Note: fetch() renvoie false si pas de voiture correspondante
+        $tab = [];
+        foreach ($pdoStatement as $row) {
+            $tab[] = static::construire($row);
+        }
+
+        return $tab;
+    }
+
     public static function construire($row) : Article {
         return new Article($row['id'], $row['nom'], $row['marque'], $row['prixBatk']);
     }

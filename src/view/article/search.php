@@ -6,7 +6,7 @@
     </head>
     <body>
         <?php
-        
+        require 'list.php';
         ?>
     </body>
 </html>

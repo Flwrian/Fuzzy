@@ -60,5 +60,12 @@ class ControllerArticle {
     public static function error(string $errorMessage = "") : void {
         static::afficheVue('view.php', ['pagetitle' => 'Erreur', 'cheminVueBody' => 'article/error.php', 'errorMessage' => $errorMessage]);
     }
+
+    public static function search() : void {
+        $query = $_GET['query'];
+        $query = htmlspecialchars($query);
+        $articles = ArticleRepository::getArticlesByQuery($query);
+        static::afficheVue('view.php', ['articles' => $articles, 'pagetitle' => 'Recherche des articles', 'cheminVueBody' => 'article/search.php', 'query' => $query]);
+    }
 }
 ?>

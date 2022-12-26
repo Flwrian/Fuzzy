@@ -24,11 +24,11 @@
                     <path d="M8.96 10L.52 1.562 0 1.042 1.04 0l.522.52L10 8.96 18.438.52l.52-.52L20 1.04l-.52.522L11.04 10l8.44 8.438.52.52L18.96 20l-.522-.52L10 11.04l-8.438 8.44-.52.52L0 18.96l.52-.522L8.96 10z" fill-rule="evenodd" />
                 </symbol>
                 </svg>
-
-                <form novalidate="novalidate" onsubmit="return false;" class="searchbox sbx-amazon">
+                <form method="get" action="frontController.php" class="searchbox sbx-amazon">
+                <input type='hidden' name='action' value='search'>
                 <div role="search" class="sbx-amazon__wrapper">
-                    <input type="search" name="search" placeholder="Rechercher un article" autocomplete="off" required="required" class="sbx-amazon__input">
-                    <button type="submit" title="Submit your search query." class="sbx-amazon__submit">
+                    <input type="search" name="query" placeholder="Rechercher un article" autocomplete="off" required="required" class="sbx-amazon__input">
+                    <button type="submit" title="Rechercher" class="sbx-amazon__submit">
                     <svg role="img" aria-label="Search">
                         <use xlink:href="#sbx-icon-search-11"></use>
                     </svg>
