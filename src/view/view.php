@@ -9,8 +9,10 @@
       <header>
         
             <nav>
-               <!-- Logo -->
-               <img src="../images/logo.png" alt="Logo" class="logo">
+               <!-- Logo in a -->
+                <a href="frontController.php" class="logo">
+                    <img src="../images/logo.png" alt="Logo" class="logo">
+                </a>
 
 
 
