@@ -10,7 +10,7 @@ $loader->addNamespace('App\Covoiturage', __DIR__ . '/../../src/');
 // register the autoloader
 $loader->register();
 
-use App\Covoiturage\Controller\ControllerVoiture;
+use App\Covoiturage\Controller\ControllerArticle;
 
 // On recupère l'action passée dans l'URL
 if(!isset($_GET['action'])){
@@ -22,13 +22,13 @@ else{
     $action = $_GET['action'];
 }
 
-// We check if the action passed in the URL is callable in ControllerVoiture
-if(is_callable(array(ControllerVoiture::class, $action))){
-    // Appel de la méthode statique $action de ControllerVoiture
-    ControllerVoiture::$action();
+// We check if the action passed in the URL is callable in ControllerArticle
+if(is_callable(array(ControllerArticle::class, $action))){
+    // We call the action
+    ControllerArticle::$action();
 }
 else{
-    // We call the error method of ControllerVoiture because the action is not valid
-    ControllerVoiture::error("cette action n'existe pas");
+    // We call the error method of ControllerArticle because the action is not valid
+    ControllerArticle::error("Action non valide");
 }
 ?>

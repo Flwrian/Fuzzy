@@ -12,8 +12,9 @@
                <img src="../images/logo.png" alt="Logo" class="logo">
 
                 <!-- Search bar -->
-               <form action="search.php" method="post">
+               <form action="search.php" method="get">
                   <input type="text" name="search" placeholder="Search">
+                  <input type='hidden' name='action' value='search'>
                   <button type="submit" name="submit-search">Search</button>
                </form>
                <!-- Connect button -->

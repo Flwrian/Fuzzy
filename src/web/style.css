@@ -112,7 +112,7 @@ footer{
     align-items: center;
     padding: 10px;
     /* gradient background */
-    background: linear-gradient(blue, black);
+    background: linear-gradient(rgb(238, 202, 102), rgb(241, 151, 87));
 }
 
 .cards {
