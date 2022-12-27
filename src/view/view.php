@@ -49,17 +49,32 @@
 
 
 
+                <?php
+                if (isset($_SESSION['user'])) {
+                    $user = $_SESSION['user'];
+                    $username = $user->getUsername();
+                    echo '<a href="frontController.php?action=deconnection" class="connect">
+                    <img src="../images/profile.png" alt="Se connecter" class="connectImage">
+                    <span> ' . $username . '</span>
+                </a>';
+                } else {
+                    echo '<a href="frontController.php?action=connection" class="connect">
+                    <img src="../images/profile.png" alt="Se connecter" class="connectImage">
+                    <span>Se connecter</span>
+                </a>';
+                }
+                ?>
 
-               <!-- rectangle with profile.png img and connect button -->
-               <a href="login.php" class="connect">
-                   <img src="../images/profile.png" alt="Se connecter" class="connectImage">
-                   <span>Se connecter</span>
-               </a>
                 <!-- Cart button -->
                 <a href="cart.php" class="cart">
                      <img src="../images/cart.png" alt="Panier" class="cartImage">
                      <span>Panier</span>
                 </a>
+
+
+
+
+                
 
             </nav>
       </header>
