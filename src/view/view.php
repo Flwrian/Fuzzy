@@ -69,7 +69,7 @@
                 ?>
 
                 <!-- Cart button -->
-                <a href="cart.php" class="cart">
+                <a href="frontController.php?action=readPanier" class="cart">
                      <img src="../images/cart.png" alt="Panier" class="cartImage">
                      <span>Panier</span>
                 </a>

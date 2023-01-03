@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body class="bodyCo">
     <?php
     // Login or sign up form
     if (!isset($_SESSION['user'])) {

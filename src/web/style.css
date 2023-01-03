@@ -8,7 +8,13 @@ header {
 
 
 main{
+    background: #d3f0ff;
     height: 50%;
+    padding: 20px;
+
+
+
+
 }
 
 .logo {
@@ -197,7 +203,7 @@ h1 > .coinIcon{
     top: 5px;
 }
 
-#formPanier>button{
+#formPanier> .button{
     border-radius: 30px;
     margin: 4px 2px;
     padding: 10px 20px;
@@ -207,8 +213,27 @@ h1 > .coinIcon{
     color: white;
 }
 
-#formPanier>button:hover{
+#formPanier> .button:hover{
     background-color: #639FAB;
+}
+
+.payForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.payButton {
+    border-radius: 30px;
+    margin: 4px 2px;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #101D42;
+    cursor: pointer;
+    color: white;
 }
 .connect {
     background-color: #639FAB;

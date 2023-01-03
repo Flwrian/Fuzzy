@@ -2,6 +2,7 @@
 namespace App\Covoiturage\Controller;
 
 use App\Covoiturage\Model\DataObject\Article;
+use App\Covoiturage\Model\DataObject\User;
 use App\Covoiturage\Model\DataObject\Panier;
 use App\Covoiturage\Model\Repository\ArticleRepository;
 use App\Covoiturage\Model\Repository\UserRepository;
@@ -59,7 +60,7 @@ class ControllerUser {
         $password = $_POST['password'];
         $password = htmlspecialchars($password);
 
-        $user = new Panier($login, $mail, $password);
+        $user = new User($login, $mail, $password);
 
         UserRepository::sauvegarder($user);
 
@@ -71,15 +72,20 @@ class ControllerUser {
     }
 
     public static function addPanier(){
-        $id = $_GET['id'];
+        $id = $_POST['idArticle'];
         $article = ArticleRepository::getArticleById($id);
-        
+
         if(isset($_SESSION['panier']))
             $panier = $_SESSION['panier'];
         else
-            $panier = new Panier(0);
+            $_SESSION['panier'] = new Panier(0);
+            $panier = $_SESSION['panier'];
 
         $panier->ajouterArticle($article);
         header('Location: frontController.php');
+    }
+
+    public static function readPanier(){
+        static::afficheVue('view.php', ['pagetitle' => 'Panier', 'cheminVueBody' => 'article/cart.php']);
     }
 }

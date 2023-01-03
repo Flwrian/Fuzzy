@@ -41,6 +41,8 @@ class ControllerArticle {
         $prixBatk = $_GET['prixBatkArticle'];
         $prixBatk = htmlspecialchars($prixBatk);
 
+
+
         $article = new Article(null, $nom, $marque, $prixBatk);
         ArticleRepository::sauvegarder($article);
         $articles = ArticleRepository::getArticles();

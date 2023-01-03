@@ -9,6 +9,31 @@
 
 }
 
+.bodyCo{
+    background-color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #000;
+    margin: 0;
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+
+}
+
+.bodyCo{
+    background-color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #000;
+    margin: 0;
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
 .loginForm label {
     display: block;
     margin-bottom: 10px;

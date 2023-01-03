@@ -12,19 +12,23 @@
     <fieldset>
         <legend>Ajout d'un article / produit :</legend>
         <p>
-        <label for="nomArticle">Nom</label> :
+        <label for="nomArticle">Nom</label>
         <input type="text" placeholder="Ex : Glock 17 | Polymer" name="nomArticle" id="nomArticle" required/>
         </p>
         <p>
-        <label for="marqueArticle">Marque</label> :
+        <label for="marqueArticle">Marque</label>
         <input type="text" placeholder="Ex : Glock" name="marqueArticle" id="marqueArticle" required/>
         </p>
         <p>
-        <label for="prixBatkArticle">Prix de batk</label> :
+        <label for="prixBatkArticle">Prix de batk</label>
         <input type="number" placeholder="Ex : 500" name="prixBatkArticle" id="prixBatkArticle" required/>
         </p>
         <p>
-            <label for="imageArticle">Image</label> :
+            <label for="descriptionArticle">Description</label>
+            <input type="text" name="descriptionArticle" id="descriptionArticle" required>
+        </p>
+        <p>
+            <label for="imageArticle">Image</label>
             <input type="file" id="inputFile" name="imageArticle" accept="image/png, image/jpeg"/>
         </p>
         <p>
