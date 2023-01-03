@@ -10,7 +10,7 @@
    </head>
    <body>
       <header>
-        
+
             <nav>
                <!-- Logo in a -->
                 <a href="frontController.php" class="logo">
@@ -74,10 +74,16 @@
                      <span>Panier</span>
                 </a>
 
+                <?php
+                if (isset($_SESSION['user']) && $_SESSION['user']->getAdmin()){
+                    echo "<a href=\"frontController.php?action=admin\" class=\"adminButton\">
+                    <span>Administration</span>
+                </a>";
+                }
+                ?>
 
 
 
-                
 
             </nav>
       </header>
