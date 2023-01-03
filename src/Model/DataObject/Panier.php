@@ -7,8 +7,8 @@ use App\Covoiturage\Model\Repository\DatabaseConnection;
 class Panier {
 
     private int $idPanier;
-    private string $date;
-    private string $emailUtilisateur;
+    private ?string $date;
+    private ?string $emailUtilisateur;
 
     private array $articles = [];
 
@@ -77,6 +77,11 @@ class Panier {
     public function getArticles(): array
     {
         return $this->articles;
+    }
+
+    public function setArticles(array $articles):void
+    {
+        $this->articles = $articles;
     }
 
    public function ajouterArticle(Article $a): void {

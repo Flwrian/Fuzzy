@@ -45,6 +45,25 @@ class ArticleRepository {
         }
     }
 
+    public static function getArticlesByPanier(int $idPanier): array {
+
+        $tab = [];
+
+        $pdoStatement = DatabaseConnection::getPdo()->prepare("SELECT a.id,nom,marque,prixBatk,ImageTile,description FROM ArticleFuzzy a JOIN estDans e ON a.id = e.idArticle WHERE e.idPanier = :idPanier");
+
+
+        $values = array(
+            "idPanier" => $idPanier,
+            //nomdutag => valeur, ...
+        );
+
+        foreach ($pdoStatement as $row) {
+            $tab[] = ArticleRepository::construire($row);
+        }
+
+        return $tab;
+    }
+
     public static function getArticlesByQuery(string $query) : array {
         $sql = "SELECT * from ArticleFuzzy WHERE nom LIKE :query OR marque LIKE :query";
         // Préparation de la requête
