@@ -3,6 +3,7 @@
 namespace App\Covoiturage\Model\DataObject;
 
 use App\Covoiturage\Model\Repository\DatabaseConnection;
+use App\Covoiturage\Model\Repository\ArticleRepository;
 
 class EstDans {
 
@@ -43,6 +44,10 @@ class EstDans {
     public function getArticleId(): string
     {
         return $this->idArticle;
+    }
+
+    public function getArticle (): Article {
+        return ArticleRepository::getArticleById($this->idArticle);
     }
 
     /**

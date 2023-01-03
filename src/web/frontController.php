@@ -1,17 +1,7 @@
 <?php
-/* Sans le include de User.php, on a une erreur comme quoi la classe n'est pas complète */
-include __DIR__ . '/../Model/DataObject/User.php';
-include __DIR__ . '/../Model/DataObject/Panier.php';
-include __DIR__ . '/../Model/DataObject/Article.php';
 
-
-/* On start la session */
-session_start();
-
-ini_set('display_errors', 'on');
 use App\Covoiturage\Lib\Psr4AutoloaderClass;
 require_once __DIR__ . '/../Lib/Psr4AutoloaderClass.php';
-
 // instantiate the loader
 $loader = new Psr4AutoloaderClass();
 // register the base directories for the namespace prefix
@@ -19,8 +9,18 @@ $loader->addNamespace('App\Covoiturage', __DIR__ . '/../../src/');
 // register the autoloader
 $loader->register();
 
+
+
+use App\Covoiturage\Model\Repository\ArticleRepository;
 use App\Covoiturage\Controller\ControllerArticle;
 use App\Covoiturage\Controller\ControllerUser;
+
+/* On start la session */
+session_start();
+
+ini_set('display_errors', 'on');
+
+
 
 // On recupère l'action passée dans l'URL
 if(!isset($_GET['action'])){

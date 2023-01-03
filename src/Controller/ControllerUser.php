@@ -81,7 +81,7 @@ class ControllerUser {
             $_SESSION['panier'] = new Panier(0);
             $panier = $_SESSION['panier'];
 
-        $panier->ajouterArticle($article);
+        $panier->ajouterArticle($article,1);
         header('Location: frontController.php');
     }
 
