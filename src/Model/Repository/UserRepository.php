@@ -2,12 +2,12 @@
 
 namespace App\Covoiturage\Model\Repository;
 
-use App\Covoiturage\Model\DataObject\Panier;
-use App\Covoiturage\Model\Repository\DatabaseConnection;   
+use App\Covoiturage\Model\DataObject\User;
+use App\Covoiturage\Model\Repository\DatabaseConnection;
 
 class UserRepository {
 
-    public static function getUserByCredentials(string $username, string $email, string $password) : Panier|null {
+    public static function getUserByCredentials(string $username, string $email, string $password) : User|null {
         $db = DatabaseConnection::getPdo();
         $query = $db->prepare("SELECT * FROM UtilisateurFuzzy WHERE username = :username AND mail = :mail AND password = :password");
         $query->execute([
@@ -17,7 +17,7 @@ class UserRepository {
         ]);
         $result = $query->fetch();
         if ($result) {
-            return new Panier(
+            return new User(
                 $result["username"],
                 $result["mail"],
                 $result["password"],
@@ -27,13 +27,14 @@ class UserRepository {
         return null;
     }
 
-    public static function sauvegarder(Panier $user) : void {
+    public static function sauvegarder(User $user) : void {
         $db = DatabaseConnection::getPdo();
-        $query = $db->prepare("INSERT INTO UtilisateurFuzzy (username, mail, password) VALUES (:username, :mail, :password)");
+        $query = $db->prepare("INSERT INTO UtilisateurFuzzy (username, mail, password, admin) VALUES (:username, :mail, :password, :admin)");
         $query->execute([
             "username" => $user->getUsername(),
             "mail" => $user->getMail(),
-            "password" => $user->getPassword()
+            "password" => $user->getPassword(),
+            "admin" => $user->getAdmin(),
         ]);
 
         if ($query->errorCode() !== "00000") {
