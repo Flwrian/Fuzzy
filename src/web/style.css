@@ -190,7 +190,28 @@ footer{
 nav .search {
     padding: 1px;
 }
+h1 > .coinIcon{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid black;
+    position: relative;
+    top: 2px;
+}
 
+#formPanier>button{
+    border-radius: 30px;
+    margin: 4px 2px;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #101D42;
+    cursor: pointer;
+    color: white;
+}
+
+#formPanier>button:hover{
+    background-color: #639FAB;
+}
 .connect {
     background-color: #639FAB;
     border-radius: 10px;
