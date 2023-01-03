@@ -24,11 +24,12 @@
         <input type="number" placeholder="Ex : 500" name="prixBatkArticle" id="prixBatkArticle" required/>
         </p>
         <p>
-        <input type="submit" value="Créer" />
-        </p>
-        <p>
             <input type="file" id="inputFile" accept="image/png, image/jpeg"/>
         </p>
+        <p>
+        <input type="submit" value="Créer" />
+        </p>
+
     </fieldset> 
     </form>
 </body>
