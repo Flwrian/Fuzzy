@@ -74,6 +74,12 @@ class ControllerUser {
         $id = $_GET['id'];
         $article = ArticleRepository::getArticleById($id);
         
+        if(isset($_SESSION['panier']))
+            $panier = $_SESSION['panier'];
+        else
+            $panier = new Panier(0);
+
+        $panier->ajouterArticle($article);
         header('Location: frontController.php');
     }
 }
