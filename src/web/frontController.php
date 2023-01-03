@@ -4,6 +4,7 @@ include __DIR__ . '/../Model/DataObject/User.php';
 
 /* On start la session */
 session_start();
+var_dump($_SESSION);
 
 ini_set('display_errors', 'on');
 use App\Covoiturage\Lib\Psr4AutoloaderClass;

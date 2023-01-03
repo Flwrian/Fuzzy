@@ -7,8 +7,8 @@ use App\Covoiturage\Model\Repository\DatabaseConnection;
 class Panier {
 
     private int $idPanier;
-    private string $date;
-    private string $emailUtilisateur;
+    private ?string $date;
+    private ?string $emailUtilisateur;
 
     private array $articles = [];
 
