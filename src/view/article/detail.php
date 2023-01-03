@@ -22,9 +22,7 @@
                 echo "<h1>".$articles->getPrixBatk()." <img src='../images/k.png' alt='Logo' class='coinIcon'></h1>"
                 ?>
                 <form id="formPanier">
-                    <button type="button">
-                        Mettre dans le panier
-                    </button>
+                    <button type="submit" formaction="frontController.php?action=addPanier&idArticle=<?php echo $articles->getId(); ?>">Ajouter au panier</button>
                 </form>
             </div>
         </main>

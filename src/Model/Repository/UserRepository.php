@@ -20,7 +20,8 @@ class UserRepository {
             return new User(
                 $result["username"],
                 $result["mail"],
-                $result["password"]
+                $result["password"],
+                $result["admin"]
             );
         }
         return null;
