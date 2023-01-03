@@ -9,8 +9,6 @@
 <body>
     <!-- Login form -->
     <form action="frontController.php?action=authenticate" method="post" class="loginForm">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" required>
         <label for="email">Email</label>
         <input type="email" name="email" id="email" required>
         <label for="password">Password</label>
@@ -20,8 +18,6 @@
 
     <!-- Sign up form -->
     <form action="frontController.php?action=register" method="post" class="signupForm">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" required>
         <label for="email">Email</label>
         <input type="email" name="email" id="email" required>
         <label for="password">Password</label>

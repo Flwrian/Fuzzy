@@ -6,7 +6,6 @@ use App\Covoiturage\Model\Repository\DatabaseConnection;
 
 class User {
 
-    private string $username;
     private string $mail;
     private string $password;
 
@@ -15,20 +14,15 @@ class User {
     private $cart = [];
 
     public function __construct(
-        string $username,
         string $mail,
         string $password,
         int $admin = 0
     ) {
-        $this->username = $username;
         $this->mail = $mail;
         $this->password = $password;
         $this->admin = $admin;
     }
 
-    public function getUsername() : string {
-        return $this->username;
-    }
 
     /**
      * @return int

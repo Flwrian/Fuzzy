@@ -23,13 +23,12 @@ class ControllerUser {
     public static function authenticate(){
 
         /* On récupère nos variables POST */
-        $login = $_POST['username'];
-        $login = htmlspecialchars($login);
         $mail = $_POST['email'];
+        $mail = htmlspecialchars($mail);
         $password = $_POST['password'];
         $password = htmlspecialchars($password);
 
-        $user = UserRepository::getUserByCredentials($login, $mail, $password);
+        $user = UserRepository::getUserByCredentials($mail, $password);
         $articles = ArticleRepository::getArticles();
 
         if($user == null){
@@ -55,14 +54,12 @@ class ControllerUser {
     public static function register(){
 
         /* On récupère nos variables POST */
-        $login = $_POST['username'];
-        $login = htmlspecialchars($login);
         $mail = $_POST['email'];
         $mail = htmlspecialchars($mail);
         $password = $_POST['password'];
         $password = htmlspecialchars($password);
 
-        $user = new User($login, $mail, $password);
+        $user = new User($mail, $password);
 
         UserRepository::sauvegarder($user);
 

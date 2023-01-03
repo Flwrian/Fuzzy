@@ -55,7 +55,7 @@
                 <?php
                 if (isset($_SESSION['user'])) {
                     $user = $_SESSION['user'];
-                    $username = $user->getUsername();
+                    $username = $user->getMail();
                     echo '<a href="frontController.php?action=deconnection" class="connect">
                     <img src="../images/profile.png" alt="Se connecter" class="connectImage">
                     <span> ' . $username . '</span>
