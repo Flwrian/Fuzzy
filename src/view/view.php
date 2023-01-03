@@ -6,6 +6,7 @@
       <link rel="stylesheet" href="../web/style.css">
        <link rel="stylesheet" href="../web/connection.css">
        <link rel="stylesheet" href="../web/detail.css">
+         <link rel="stylesheet" href="../web/create.css">
    </head>
    <body>
       <header>
@@ -85,6 +86,7 @@
           <?php
           require __DIR__ . "/{$cheminVueBody}";
           ?>
+
 
       </main>
       </wrap>
