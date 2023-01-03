@@ -28,8 +28,5 @@
                 </form>
             </div>
         </main>
-        <?php
-        echo "Article : " . $articles->getNom() . "<br>" . $articles->getMarque() . "<br>" . $articles->getPrixBatk() . "<br>";
-        ?>
     </body>
 </html>
