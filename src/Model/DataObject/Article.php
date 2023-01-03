@@ -33,7 +33,7 @@ class Article {
     }
 
     public function __toString() : string {
-        return "Article{id=$this->id, nom=$this->nom, marque=$this->marque, prixBatk=$this->prixBatk, cheminImageTile=$this->cheminImageTile}";
+        return "Article{id=$this->id, nom=$this->nom, marque=$this->marque, prixBatk=$this->prixBatk, cheminImageTile=$this->cheminImageTile, description=$this->description}";
 
     }
 

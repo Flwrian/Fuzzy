@@ -91,7 +91,7 @@ class ArticleRepository {
     }
 
     public static function sauvegarder(Article $article) : void {
-        $sql = "INSERT INTO ArticleFuzzy (id, nom, marque, prixBatk) VALUES (:idArticle, :nomArticle, :marqueArticle, :prixBatk)";
+        $sql = "INSERT INTO ArticleFuzzy (id, nom, marque, prixBatk,description) VALUES (:idArticle, :nomArticle, :marqueArticle, :prixBatk, :description)";
         // Préparation de la requête
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
 
@@ -100,6 +100,7 @@ class ArticleRepository {
             "nomArticle" => $article->getNom(),
             "marqueArticle" => $article->getMarque(),
             "prixBatk" => $article->getPrixBatk(),
+            "description" => $article->getDescription(),
         );
         // On donne les valeurs et on exécute la requête
         $pdoStatement->execute($values);
