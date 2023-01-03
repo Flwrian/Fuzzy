@@ -1,6 +1,10 @@
 <?php
+/* Sans le include de User.php, on a une erreur comme quoi la classe n'est pas complète */
 include __DIR__ . '/../Model/DataObject/User.php';
+
+/* On start la session */
 session_start();
+
 ini_set('display_errors', 'on');
 use App\Covoiturage\Lib\Psr4AutoloaderClass;
 require_once __DIR__ . '/../Lib/Psr4AutoloaderClass.php';
@@ -30,6 +34,7 @@ if(is_callable(array(ControllerArticle::class, $action))){
     // We call the action
     ControllerArticle::$action();
 }
+// We check if the action passed in the URL is callable in ControllerUser
 else if (is_callable(array(ControllerUser::class, $action))){
     // We call the action
     ControllerUser::$action();

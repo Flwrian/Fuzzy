@@ -19,6 +19,7 @@ class ControllerUser {
 
     public static function authenticate(){
 
+        /* On récupère nos variables POST */
         $login = $_POST['username'];
         $login = htmlspecialchars($login);
         $mail = $_POST['email'];
@@ -32,14 +33,40 @@ class ControllerUser {
             static::afficheVue('view.php', ['pagetitle' => 'Erreur', 'cheminVueBody' => 'article/error.php', 'errorMessage' => 'Utilisateur non trouvé']);
         }
         else{
+            /* On setup la session */
             $_SESSION['user'] = $user;
+
+            /* On redirige le visiteur vers la page d'accueil */
             static::afficheVue('view.php', ['articles' => $articles, 'user' => $user, 'pagetitle' => 'Bienvenue', 'cheminVueBody' => 'article/list.php']);
         }
     }
 
     public static function deconnection(){
+        /* On détruit la session */
         session_destroy();
-        $articles = ArticleRepository::getArticles();
+
+        /* On redirige le visiteur vers la page d'accueil */
+        header('Location: frontController.php');
+    }
+
+    public static function register(){
+
+        /* On récupère nos variables POST */
+        $login = $_POST['username'];
+        $login = htmlspecialchars($login);
+        $mail = $_POST['email'];
+        $mail = htmlspecialchars($mail);
+        $password = $_POST['password'];
+        $password = htmlspecialchars($password);
+
+        $user = new User($login, $mail, $password);
+
+        UserRepository::sauvegarder($user);
+
+        /* On setup la session */
+        $_SESSION['user'] = $user;
+
+        /* On redirige le visiteur vers la page d'accueil */
         header('Location: frontController.php');
     }
 }

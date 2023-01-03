@@ -48,7 +48,7 @@
 
 
 
-
+                <!-- Connect button en fonction de la session -->
                 <?php
                 if (isset($_SESSION['user'])) {
                     $user = $_SESSION['user'];

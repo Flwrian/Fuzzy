@@ -34,5 +34,9 @@ class UserRepository {
             "mail" => $user->getMail(),
             "password" => $user->getPassword()
         ]);
+
+        if ($query->errorCode() !== "00000") {
+            throw new \Exception("Erreur lors de l'insertion de l'utilisateur");
+        }
     }
 }

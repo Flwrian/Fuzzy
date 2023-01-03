@@ -9,6 +9,7 @@ class User {
     private string $username;
     private string $mail;
     private string $password;
+    private $cart = [];
 
     public function __construct(
         string $username,
@@ -30,5 +31,9 @@ class User {
 
     public function getPassword() : string {
         return $this->password;
+    }
+
+    public function getCart() : array {
+        return $this->cart;
     }
 }
