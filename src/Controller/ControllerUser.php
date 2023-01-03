@@ -69,4 +69,17 @@ class ControllerUser {
         /* On redirige le visiteur vers la page d'accueil */
         header('Location: frontController.php');
     }
+
+    public static function addPanier(){
+        $id = $_GET['id'];
+        $article = ArticleRepository::getArticleById($id);
+        
+        if(isset($_SESSION['panier']))
+            $panier = $_SESSION['panier'];
+        else
+            $panier = new Panier(0);
+
+        $panier->ajouterArticle($article);
+        header('Location: frontController.php');
+    }
 }

@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title><?php echo $articles->getNom()?></title>
+        <title>Détail article</title>
     </head>
     <body>
         <main id="articleDetail">
@@ -22,14 +22,9 @@
                 echo "<h1>".$articles->getPrixBatk()." <img src='../images/k.png' alt='Logo' class='coinIcon'></h1>"
                 ?>
                 <form id="formPanier">
-                    <button type="button">
-                        Mettre dans le panier
-                    </button>
+                    <button type="submit" formaction="frontController.php?action=addPanier&idArticle=<?php echo $articles->getId(); ?>">Ajouter au panier</button>
                 </form>
             </div>
         </main>
-        <?php
-        echo "Article : " . $articles->getNom() . "<br>" . $articles->getMarque() . "<br>" . $articles->getPrixBatk() . "<br>";
-        ?>
     </body>
 </html>
