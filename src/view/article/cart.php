@@ -10,6 +10,17 @@
     <?php
         // Je comprends pas comment faire sans
         use App\Covoiturage\Model\Repository\ArticleRepository;
+        use App\Covoiturage\Model\Repository\PanierRepository;
+
+        if(isset($_SESSION['user'])){
+            $user = $_SESSION['user'];
+            
+            // On récupère le panier de l'utilisateur
+            $panier = PanierRepository::getPanierByMail($user->getMail());
+
+            // On sauvegarde le panier dans la session
+            $_SESSION['panier'] = $panier;
+        }
 
         if(isset($_SESSION['panier'])){
             $panier = $_SESSION['panier'];

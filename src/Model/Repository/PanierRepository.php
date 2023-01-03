@@ -51,6 +51,32 @@ class PanierRepository {
         }
     }
 
+    public static function getPanierByMail(string $mail) : Panier {
+        $sql = "SELECT * from Panier WHERE emailUtilisateur = :mail";
+        // Préparation de la requête
+        $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
+
+        $values = array(
+            "mail" => $mail,
+            //nomdutag => valeur, ...
+        );
+        // On donne les valeurs et on exécute la requête
+        $pdoStatement->execute($values);
+
+        // On récupère les résultats comme précédemment
+        // Note: fetch() renvoie false si pas de voiture correspondante
+        $panier= $pdoStatement->fetch();
+
+        if ($panier) {
+            // static::construire($voiture) est la même chose que Voiture::construire($voiture) mais est plus flexible si on veut changer le nom de la classe par exemple.
+            $p = PanierRepository::construire($panier);
+            $p->setArticles(EstDansRepository::getArticlesByPanier($p->getIdPanier()));
+            return $p;
+        } else {
+            return null;
+        }
+    }
+
     public static function construire($row) : Panier {
         return new Panier($row['idPanier'], $row['payementDate'], $row['emailUtilisateur']);
     }

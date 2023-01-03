@@ -22,6 +22,11 @@ class EstDans {
         $this->quantite = $quantite;
     }
 
+    public function __toString(): string
+    {
+        return "Panier : " . $this->idPanier . " Article : " . $this->idArticle . " Quantité : " . $this->quantite;
+    }
+
     /**
      * @return int
      */

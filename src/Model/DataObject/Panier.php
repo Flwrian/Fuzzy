@@ -24,7 +24,7 @@ class Panier {
     }
 
     public function __toString(): string {
-        return "Panier [idPanier=$this->idPanier, date=$this->date, emailUtilisateur=$this->emailUtilisateur]";
+        return "Le panier " . $this->idPanier . " contient " . $this->getTotal() . "€";
     }
 
     public function getTotal(): float {
