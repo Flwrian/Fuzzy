@@ -39,7 +39,7 @@ class Panier {
     /**
      * @return int
      */
-    public function getIdPanier(): int
+    public function getIdPanier(): ?int
     {
         return $this->idPanier;
     }
