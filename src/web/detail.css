@@ -1,0 +1,23 @@
+body {
+    background-color: #fff;
+    color: #000;
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    border : 1px solid black;
+    margin : 10px;
+    margin-right: 45%;
+    margin-left: 45%;
+    padding : 10px;
+    border-radius: 8px;
+}

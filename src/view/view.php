@@ -3,7 +3,9 @@
    <head>
       <meta charset="UTF-8">
       <title><?php echo $pagetitle; ?></title>
-      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="../web/style.css">
+       <link rel="stylesheet" href="../web/connection.css">
+       <link rel="stylesheet" href="../web/detail.css">
    </head>
    <body>
       <header>
@@ -83,6 +85,7 @@
           <?php
           require __DIR__ . "/{$cheminVueBody}";
           ?>
+
       </main>
       </wrap>
       <footer>
