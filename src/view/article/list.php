@@ -11,6 +11,7 @@
             $id = rawurlencode($a->getId());
 
             echo "<div class='card'>";
+            echo "<img src=\"../images/".$a->getCheminImageTile()."\" alt = \"presentation\" class=\"cardImage\">";
             echo "<p>Nom : " . $a->getNom() . "</p>";
             echo "<p>Marque : " . $a->getMarque() . "</p>";
             echo "<p>Prix : " . $a->getPrixBatk() . "</p>";

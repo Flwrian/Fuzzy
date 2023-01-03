@@ -12,27 +12,35 @@ class Article {
     private string $marque;
     private string $prixBatk;
 
+    private string $cheminImageTile;
+
+    private string $description;
+
     public function __construct(
         string|null $id,
         string $nom,
         string $marque,
-        string $prixBatk
+        string $prixBatk,
+        string $cheminImageTile = "rien.png",
+        string $description = ""
     ) {
         $this->id = $id;
         $this->nom = $nom;
         $this->marque = $marque;
         $this->prixBatk = $prixBatk;
+        $this->cheminImageTile = $cheminImageTile;
+        $this->description = $description;
     }
 
     public function __toString() : string {
-        return "Article{id=$this->id, nom=$this->nom, marque=$this->marque, prixBatk=$this->prixBatk}";
+        return "Article{id=$this->id, nom=$this->nom, marque=$this->marque, prixBatk=$this->prixBatk, cheminImageTile=$this->cheminImageTile}";
 
     }
 
     public function getId() : string|null {
         return $this->id;
     }
-    
+
     public function getNom() : string {
         return $this->nom;
     }
@@ -43,6 +51,22 @@ class Article {
 
     public function getPrixBatk() : string {
         return $this->prixBatk;
+    }
+
+    public function getDescription(): string {
+        return $this->description;
+    }
+
+    public function setDescription(string $desc): void{
+        $this->description = $desc;
+    }
+
+    public function getCheminImageTile() : string {
+        return $this->cheminImageTile;
+    }
+
+    public function setCheminImageTile(string $chemin) : void{
+        $this->cheminImageTile = $chemin;
     }
 
     public function setId(string $id) : void {

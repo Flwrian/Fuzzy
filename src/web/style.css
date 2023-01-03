@@ -6,10 +6,60 @@ header {
     left: 0;
 }
 
+main{
+    height: 50%;
+}
+
 .logo {
     width: 100px;
     height: 100px;
     margin-right: 100px;
+}
+
+.cardImage {
+    height: 50%;
+    max-width: 70%;
+}
+#articleDetail {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 2%;
+}
+
+#colonneGauche{
+    padding: 2%;
+    flex-grow: 2;
+    margin: auto 0;
+    border: 10px inset #101D42 ;
+    max-width: 30%;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#acheter{
+    padding: 2%;
+    border: 10px inset #101D42 ;
+    max-width: 30%;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#description {
+    padding: 2%;
+    flex-grow: 2;
+    border: 10px inset #101D42 ;
+    max-width: 30%;
+    border-radius: 30px;
+}
+
+#colonneGauche>img{
+    width: 100%;
 }
 
 nav {
@@ -130,6 +180,29 @@ footer{
     border: 1px solid black;
 }
 
+h1 > .coinIcon{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid black;
+    position: relative;
+    top: 2px;
+}
+
+#formPanier>button{
+    border-radius: 30px;
+    margin: 4px 2px;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #101D42;
+    cursor: pointer;
+    color: white;
+}
+
+#formPanier>button:hover{
+    background-color: #639FAB;
+}
+
 nav .search {
     padding: 1px;
 }
@@ -200,12 +273,12 @@ nav .search {
     box-sizing: border-box;
     font-size: 14px;
   }
-  
+
   .sbx-amazon__wrapper {
     width: 100%;
     height: 100%;
   }
-  
+
   .sbx-amazon__input {
     display: inline-block;
     -webkit-transition: box-shadow .4s ease, background .4s ease;
@@ -226,37 +299,37 @@ nav .search {
        -moz-appearance: none;
             appearance: none;
   }
-  
+
   .sbx-amazon__input::-webkit-search-decoration, .sbx-amazon__input::-webkit-search-cancel-button, .sbx-amazon__input::-webkit-search-results-button, .sbx-amazon__input::-webkit-search-results-decoration {
     display: none;
   }
-  
+
   .sbx-amazon__input:hover {
     box-shadow: inset 0 0 0 1px #e6e6e6;
   }
-  
+
   .sbx-amazon__input:focus, .sbx-amazon__input:active {
     outline: 0;
     box-shadow: inset 0 0 0 1px #FFBF58;
     background: #FFFFFF;
   }
-  
+
   .sbx-amazon__input::-webkit-input-placeholder {
     color: #AAAAAA;
   }
-  
+
   .sbx-amazon__input::-moz-placeholder {
     color: #AAAAAA;
   }
-  
+
   .sbx-amazon__input:-ms-input-placeholder {
     color: #AAAAAA;
   }
-  
+
   .sbx-amazon__input::placeholder {
     color: #AAAAAA;
   }
-  
+
   .sbx-amazon__submit {
     position: absolute;
     top: 0;
@@ -278,7 +351,7 @@ nav .search {
         -ms-user-select: none;
             user-select: none;
   }
-  
+
   .sbx-amazon__submit::before {
     display: inline-block;
     margin-right: -4px;
@@ -286,22 +359,22 @@ nav .search {
     vertical-align: middle;
     content: '';
   }
-  
+
   .sbx-amazon__submit:hover, .sbx-amazon__submit:active {
     cursor: pointer;
   }
-  
+
   .sbx-amazon__submit:focus {
     outline: 0;
   }
-  
+
   .sbx-amazon__submit svg {
     width: 21px;
     height: 21px;
     vertical-align: middle;
     fill: #202F40;
   }
-  
+
   .sbx-amazon__reset {
     display: none;
     position: absolute;
@@ -319,18 +392,18 @@ nav .search {
             user-select: none;
     fill: rgba(0, 0, 0, 0.5);
   }
-  
+
   .sbx-amazon__reset:focus {
     outline: 0;
   }
-  
+
   .sbx-amazon__reset svg {
     display: block;
     margin: 4px;
     width: 13px;
     height: 13px;
   }
-  
+
   .sbx-amazon__input:valid ~ .sbx-amazon__reset {
     display: block;
     -webkit-animation-name: sbx-reset-in;
@@ -338,7 +411,7 @@ nav .search {
     -webkit-animation-duration: .15s;
             animation-duration: .15s;
   }
-  
+
   @-webkit-keyframes sbx-reset-in {
     0% {
       -webkit-transform: translate3d(-20%, 0, 0);
@@ -351,7 +424,7 @@ nav .search {
       opacity: 1;
     }
   }
-  
+
   @keyframes sbx-reset-in {
     0% {
       -webkit-transform: translate3d(-20%, 0, 0);

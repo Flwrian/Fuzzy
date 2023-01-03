@@ -3,7 +3,7 @@
 namespace App\Covoiturage\Model\Repository;
 
 use App\Covoiturage\Model\DataObject\Article;
-use App\Covoiturage\Model\Repository\DatabaseConnection;    
+use App\Covoiturage\Model\Repository\DatabaseConnection;
 
 
 class ArticleRepository {
@@ -25,14 +25,14 @@ class ArticleRepository {
         $sql = "SELECT * from ArticleFuzzy WHERE id = :idArticle";
         // Préparation de la requête
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
-    
+
         $values = array(
             "idArticle" => $idArticle,
             //nomdutag => valeur, ...
         );
         // On donne les valeurs et on exécute la requête
         $pdoStatement->execute($values);
-    
+
         // On récupère les résultats comme précédemment
         // Note: fetch() renvoie false si pas de voiture correspondante
         $article = $pdoStatement->fetch();
@@ -49,14 +49,14 @@ class ArticleRepository {
         $sql = "SELECT * from ArticleFuzzy WHERE nom LIKE :query OR marque LIKE :query";
         // Préparation de la requête
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
-    
+
         $values = array(
             "query" => "%" . $query . "%",
             //nomdutag => valeur, ...
         );
         // On donne les valeurs et on exécute la requête
         $pdoStatement->execute($values);
-    
+
         // On récupère les résultats comme précédemment
         // Note: fetch() renvoie false si pas de voiture correspondante
         $tab = [];
@@ -68,14 +68,14 @@ class ArticleRepository {
     }
 
     public static function construire($row) : Article {
-        return new Article($row['id'], $row['nom'], $row['marque'], $row['prixBatk']);
+        return new Article($row['id'], $row['nom'], $row['marque'], $row['prixBatk'],$row['ImageTile'],$row['description']);
     }
 
     public static function sauvegarder(Article $article) : void {
         $sql = "INSERT INTO ArticleFuzzy (id, nom, marque, prixBatk) VALUES (:idArticle, :nomArticle, :marqueArticle, :prixBatk)";
         // Préparation de la requête
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
-    
+
         $values = array(
             "idArticle" => $article->getId(),
             "nomArticle" => $article->getNom(),
@@ -90,7 +90,7 @@ class ArticleRepository {
         $sql = "DELETE FROM ArticleFuzzy WHERE id = :idArticle";
         // Préparation de la requête
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
-    
+
         $values = array(
             "idArticle" => $idArticle,
         );

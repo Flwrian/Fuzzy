@@ -2,6 +2,7 @@
 include __DIR__ . '/../Model/DataObject/User.php';
 session_start();
 ini_set('display_errors', 'on');
+error_reporting(-1);
 use App\Covoiturage\Lib\Psr4AutoloaderClass;
 require_once __DIR__ . '/../Lib/Psr4AutoloaderClass.php';
 
