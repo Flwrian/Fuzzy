@@ -14,7 +14,7 @@ class EstDans {
     public function __construct(
         int $idPanier,
         string $idArticle,
-        string $quantite,
+        int $quantite,
     ) {
         $this->idPanier = $idPanier;
         $this->idArticle = $idArticle;

@@ -79,6 +79,9 @@ class Panier {
         return $this->articles;
     }
 
+    public function ajouterArticle(Article $article, int $quantite): void{
+        $this->articles[] = new EstDans($this->$this->idPanier, $article->getId(),$quantite);
+    }
     public function setArticles(array $articles):void
     {
         $this->articles = $articles;
