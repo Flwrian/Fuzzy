@@ -31,6 +31,14 @@ class Panier {
         return $this->idPanier;
     }
 
+    public function getTotal() : float {
+        $total = 0;
+        foreach ($this->articles as $article) {
+            $total += $article->getPrixBatk();
+        }
+        return $total;
+    }
+
     /**
      * @param int $idPanier
      */

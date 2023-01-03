@@ -11,6 +11,12 @@
         if(isset($_SESSION['panier'])){
             $panier = $_SESSION['panier'];
 
+            // Echo pay button
+            $total = $panier->getTotal();
+            echo "<form action='frontController.php?action=pay' method='post' class='payForm'>";
+            echo "<input type='submit' value='Payer $total BATK' class='payButton'>";
+            echo "</form>";
+
             echo "<div class='cards'>";
             foreach ($panier->getArticles() as $a) {
                 $id = rawurlencode($a->getId());
