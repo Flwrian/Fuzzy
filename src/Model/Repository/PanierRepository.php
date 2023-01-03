@@ -14,9 +14,11 @@ class PanierRepository {
 
         $pdoStatement = DatabaseConnection::getPdo()->query("SELECT * FROM Panier");
 
+
+
         foreach ($pdoStatement as $row) {
             $p = PanierRepository::construire($row);
-            $p.setArticles(ArticleRepository::getArticlesByPanier($p->getId()));
+            $p.setArticles(EstDansRepository::getArticlesByPanier($p->getIdPanier()));
             $tab[] = $p;
         }
 
@@ -24,7 +26,7 @@ class PanierRepository {
     }
 
     public static function getPanierById(int $idPanier) : Panier|null {
-        $sql = "SELECT * from Panier WHERE id = :idPanier";
+        $sql = "SELECT * from Panier WHERE idPanier = :idPanier";
         // Préparation de la requête
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
 
@@ -42,7 +44,7 @@ class PanierRepository {
         if ($panier) {
             // static::construire($voiture) est la même chose que Voiture::construire($voiture) mais est plus flexible si on veut changer le nom de la classe par exemple.
             $p = PanierRepository::construire($panier);
-            $p.setArticles(ArticleRepository::getArticlesByPanier($p->getId()));
+            $p->setArticles(EstDansRepository::getArticlesByPanier($p->getIdPanier()));
             return $p;
         } else {
             return null;
@@ -54,18 +56,22 @@ class PanierRepository {
     }
 
     public static function sauvegarder(Panier $panier) : void {
-        $sql = "INSERT INTO ArticleFuzzy (id, nom, marque, prixBatk) VALUES (:idArticle, :nomArticle, :marqueArticle, :prixBatk)";
+        $sql = "INSERT INTO Panier (idPanier, payementDate, emailUtilisateur) VALUES(:idPanier, :payement, :mail) ON DUPLICATE KEY UPDATE
+payementDate = :payement, emailUtilisateur = :mail";
         // Préparation de la requête
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
 
         $values = array(
-            "idArticle" => $article->getId(),
-            "nomArticle" => $article->getNom(),
-            "marqueArticle" => $article->getMarque(),
-            "prixBatk" => $article->getPrixBatk(),
+            "idPanier" => $panier->getIdPanier(),
+            "payement" => $panier->getDate(),
+            "mail" => $panier->getEmailUtilisateur(),
         );
         // On donne les valeurs et on exécute la requête
         $pdoStatement->execute($values);
+
+        foreach($panier->getArticles() as $dedans){
+            $dedans->sauvegarder();
+        }
     }
 
     public static function supprimerParId(int $idPanier) : void {

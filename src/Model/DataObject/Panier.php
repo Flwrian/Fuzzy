@@ -6,14 +6,14 @@ use App\Covoiturage\Model\Repository\DatabaseConnection;
 
 class Panier {
 
-    private int $idPanier;
+    private ?int $idPanier;
     private ?string $date;
     private ?string $emailUtilisateur;
 
-    private array $articles = [];
+    private array $articles = []; // /!\ doit contenir des "estDans"
 
     public function __construct(
-        int $idPanier,
+        int $idPanier = null,
         string $date = null,
         string $emailUtilisateur = null
     ) {
@@ -83,14 +83,5 @@ class Panier {
     {
         $this->articles = $articles;
     }
-
-   public function ajouterArticle(Article $a): void {
-        $this->articles[] = $a;
-   }
-
-    public function supprimerArticle(Article $a): void {
-        array_shift($this->articles);
-    }
-
 
 }
