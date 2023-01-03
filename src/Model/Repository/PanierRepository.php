@@ -51,7 +51,7 @@ class PanierRepository {
         }
     }
 
-    public static function getPanierByMail(string $mail) : Panier {
+    public static function getPanierByMail(string $mail) : Panier | null {
         $sql = "SELECT * from Panier WHERE emailUtilisateur = :mail";
         // Préparation de la requête
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);

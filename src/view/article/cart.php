@@ -19,7 +19,9 @@
             $panier = PanierRepository::getPanierByMail($user->getMail());
 
             // On sauvegarde le panier dans la session
-            $_SESSION['panier'] = $panier;
+            if($panier != null){
+                $_SESSION['panier'] = $panier;
+            }
         }
 
         if(isset($_SESSION['panier'])){
@@ -38,11 +40,13 @@
 
                 $a = ArticleRepository::getArticleById(rawurlencode($a->getArticleId()));
                 $id = $a->getId();
-
+                // Remove from cart button
+                
                 /* Clickable cards */
                 echo "<a href='frontController.php?action=read&idArticle=" . $id . "'>";
-
+                
                 echo "<div class='card'>";
+                echo "<a href='frontController.php?action=removeFromCart&idArticle=" . $id . "' class='removeButton'>X</a>";
                 echo "<img src=\"../images/".$a->getCheminImageTile()."\" alt = \"presentation\" class=\"cardImage\">";
                 echo "<p>Nom : " . $a->getNom() . "</p>";
                 echo "<p>Marque : " . $a->getMarque() . "</p>";
