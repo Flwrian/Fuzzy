@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title><?php echo $articles->getNom()?></title>
+        <title>Détail article</title>
     </head>
     <body>
         <main id="articleDetail">
