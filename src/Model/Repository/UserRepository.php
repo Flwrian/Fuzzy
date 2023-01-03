@@ -2,12 +2,12 @@
 
 namespace App\Covoiturage\Model\Repository;
 
-use App\Covoiturage\Model\DataObject\User;
+use App\Covoiturage\Model\DataObject\Panier;
 use App\Covoiturage\Model\Repository\DatabaseConnection;   
 
 class UserRepository {
 
-    public static function getUserByCredentials(string $username, string $email, string $password) : User|null {
+    public static function getUserByCredentials(string $username, string $email, string $password) : Panier|null {
         $db = DatabaseConnection::getPdo();
         $query = $db->prepare("SELECT * FROM UtilisateurFuzzy WHERE username = :username AND mail = :mail AND password = :password");
         $query->execute([
@@ -17,7 +17,7 @@ class UserRepository {
         ]);
         $result = $query->fetch();
         if ($result) {
-            return new User(
+            return new Panier(
                 $result["username"],
                 $result["mail"],
                 $result["password"],
@@ -27,7 +27,7 @@ class UserRepository {
         return null;
     }
 
-    public static function sauvegarder(User $user) : void {
+    public static function sauvegarder(Panier $user) : void {
         $db = DatabaseConnection::getPdo();
         $query = $db->prepare("INSERT INTO UtilisateurFuzzy (username, mail, password) VALUES (:username, :mail, :password)");
         $query->execute([

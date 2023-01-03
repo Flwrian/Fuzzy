@@ -2,7 +2,7 @@
 namespace App\Covoiturage\Controller;
 
 use App\Covoiturage\Model\DataObject\Article;
-use App\Covoiturage\Model\DataObject\User;
+use App\Covoiturage\Model\DataObject\Panier;
 use App\Covoiturage\Model\Repository\ArticleRepository;
 use App\Covoiturage\Model\Repository\UserRepository;
 
@@ -59,7 +59,7 @@ class ControllerUser {
         $password = $_POST['password'];
         $password = htmlspecialchars($password);
 
-        $user = new User($login, $mail, $password);
+        $user = new Panier($login, $mail, $password);
 
         UserRepository::sauvegarder($user);
 
