@@ -194,7 +194,7 @@ h1 > .coinIcon{
     border-radius: 50%;
     border: 1px solid black;
     position: relative;
-    top: 2px;
+    top: 5px;
 }
 
 #formPanier>button{
