@@ -77,12 +77,9 @@ footer{
     background: #101D42;
     width: 100%;
     height: 25%;
-    bottom: 0;
     position: absolute;
     display: flex;
-    margin-top : auto;
     flex-direction: column;
-    margin-bottom: 0;
 }
 
 * {
