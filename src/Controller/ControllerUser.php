@@ -88,4 +88,9 @@ class ControllerUser {
     public static function readPanier(){
         static::afficheVue('view.php', ['pagetitle' => 'Panier', 'cheminVueBody' => 'article/cart.php']);
     }
+
+    public static function Admin(){
+        $articles = ArticleRepository::getArticles();
+        static::afficheVue('view.php', ['articles' => $articles,'pagetitle' => 'Admin', 'cheminVueBody' => 'article/admin.php']);
+    }
 }

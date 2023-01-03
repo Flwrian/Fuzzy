@@ -40,13 +40,15 @@ class ControllerArticle {
         $marque = htmlspecialchars($marque);
         $prixBatk = $_GET['prixBatkArticle'];
         $prixBatk = htmlspecialchars($prixBatk);
+        $description = $_GET['descriptionArticle'];
+        $description = htmlspecialchars($description);
 
 
 
-        $article = new Article(null, $nom, $marque, $prixBatk);
+        $article = new Article(null, $nom, $marque, $prixBatk, $description);
         ArticleRepository::sauvegarder($article);
         $articles = ArticleRepository::getArticles();
-        
+
         static::afficheVue('view.php', ['article' => $article, 'pagetitle' => 'Article créee', 'cheminVueBody' => 'article/created.php', 'articles' => $articles]);
     }
 
@@ -71,4 +73,5 @@ class ControllerArticle {
         static::afficheVue('view.php', ['articles' => $articles, 'pagetitle' => 'Recherche des articles', 'cheminVueBody' => 'article/search.php', 'query' => $query]);
     }
 }
+
 ?>
