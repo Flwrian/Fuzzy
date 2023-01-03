@@ -285,6 +285,17 @@ h1 > .coinIcon{
     scale: 0.8;
 }
 
+.adminButton {
+    background-color: #639FAB;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    text-decoration: none;
+    scale: 0.8;
+}
+
 .cart > * {
     padding: 1px;
 }
@@ -318,12 +329,12 @@ h1 > .coinIcon{
     box-sizing: border-box;
     font-size: 14px;
   }
-  
+
   .sbx-amazon__wrapper {
     width: 100%;
     height: 100%;
   }
-  
+
   .sbx-amazon__input {
     display: inline-block;
     -webkit-transition: box-shadow .4s ease, background .4s ease;
@@ -344,37 +355,37 @@ h1 > .coinIcon{
        -moz-appearance: none;
             appearance: none;
   }
-  
+
   .sbx-amazon__input::-webkit-search-decoration, .sbx-amazon__input::-webkit-search-cancel-button, .sbx-amazon__input::-webkit-search-results-button, .sbx-amazon__input::-webkit-search-results-decoration {
     display: none;
   }
-  
+
   .sbx-amazon__input:hover {
     box-shadow: inset 0 0 0 1px #e6e6e6;
   }
-  
+
   .sbx-amazon__input:focus, .sbx-amazon__input:active {
     outline: 0;
     box-shadow: inset 0 0 0 1px #FFBF58;
     background: #FFFFFF;
   }
-  
+
   .sbx-amazon__input::-webkit-input-placeholder {
     color: #AAAAAA;
   }
-  
+
   .sbx-amazon__input::-moz-placeholder {
     color: #AAAAAA;
   }
-  
+
   .sbx-amazon__input:-ms-input-placeholder {
     color: #AAAAAA;
   }
-  
+
   .sbx-amazon__input::placeholder {
     color: #AAAAAA;
   }
-  
+
   .sbx-amazon__submit {
     position: absolute;
     top: 0;
@@ -396,7 +407,7 @@ h1 > .coinIcon{
         -ms-user-select: none;
             user-select: none;
   }
-  
+
   .sbx-amazon__submit::before {
     display: inline-block;
     margin-right: -4px;
@@ -404,22 +415,22 @@ h1 > .coinIcon{
     vertical-align: middle;
     content: '';
   }
-  
+
   .sbx-amazon__submit:hover, .sbx-amazon__submit:active {
     cursor: pointer;
   }
-  
+
   .sbx-amazon__submit:focus {
     outline: 0;
   }
-  
+
   .sbx-amazon__submit svg {
     width: 21px;
     height: 21px;
     vertical-align: middle;
     fill: #202F40;
   }
-  
+
   .sbx-amazon__reset {
     display: none;
     position: absolute;
@@ -437,18 +448,18 @@ h1 > .coinIcon{
             user-select: none;
     fill: rgba(0, 0, 0, 0.5);
   }
-  
+
   .sbx-amazon__reset:focus {
     outline: 0;
   }
-  
+
   .sbx-amazon__reset svg {
     display: block;
     margin: 4px;
     width: 13px;
     height: 13px;
   }
-  
+
   .sbx-amazon__input:valid ~ .sbx-amazon__reset {
     display: block;
     -webkit-animation-name: sbx-reset-in;
@@ -456,7 +467,7 @@ h1 > .coinIcon{
     -webkit-animation-duration: .15s;
             animation-duration: .15s;
   }
-  
+
   @-webkit-keyframes sbx-reset-in {
     0% {
       -webkit-transform: translate3d(-20%, 0, 0);
@@ -469,7 +480,7 @@ h1 > .coinIcon{
       opacity: 1;
     }
   }
-  
+
   @keyframes sbx-reset-in {
     0% {
       -webkit-transform: translate3d(-20%, 0, 0);
