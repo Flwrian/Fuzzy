@@ -78,10 +78,10 @@ class ControllerUser {
         if(isset($_SESSION['panier']))
             $panier = $_SESSION['panier'];
         else
-            $panier = new Panier(0);
+            $_SESSION['panier'] = new Panier(0);
+            $panier = $_SESSION['panier'];
 
         $panier->ajouterArticle($article);
-        var_dump($_SESSION['panier']);
         header('Location: frontController.php');
     }
 }

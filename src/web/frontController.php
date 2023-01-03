@@ -1,10 +1,10 @@
 <?php
 /* Sans le include de User.php, on a une erreur comme quoi la classe n'est pas complète */
 include __DIR__ . '/../Model/DataObject/User.php';
+include __DIR__ . '/../Model/DataObject/Panier.php';
 
 /* On start la session */
 session_start();
-var_dump($_SESSION);
 
 ini_set('display_errors', 'on');
 use App\Covoiturage\Lib\Psr4AutoloaderClass;
