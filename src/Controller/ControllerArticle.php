@@ -29,6 +29,7 @@ class ControllerArticle {
         }
     }
 
+
     public static function create() : void {
         static::afficheVue('view.php', ['pagetitle' => 'Création de la page', 'cheminVueBody' => 'article/create.php']);
     }
@@ -86,6 +87,15 @@ class ControllerArticle {
         ArticleRepository::supprimerParId($article->getId());
         $articles = ArticleRepository::getArticles();
         static::afficheVue('view.php', ['article' => $article, 'pagetitle' => 'Article supprimée', 'cheminVueBody' => 'article/deleted.php', 'articles' => $articles]);
+    }
+
+    public static function deleteAdmin() : void{
+        $id = $_GET['idArticle'];
+        $id = htmlspecialchars($id);
+        $article = ArticleRepository::getArticleById($id);
+        ArticleRepository::supprimerParId($article->getId());
+        $articles = ArticleRepository::getArticles();
+        static::afficheVue('view.php', ['article' => $article, 'pagetitle' => 'Article supprimée', 'cheminVueBody' => 'article/deletedAdmin.php', 'articles' => $articles]);
     }
 
     public static function error(string $errorMessage = "") : void {

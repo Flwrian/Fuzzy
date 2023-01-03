@@ -6,6 +6,8 @@ use App\Covoiturage\Model\DataObject\User;
 use App\Covoiturage\Model\DataObject\Panier;
 use App\Covoiturage\Model\Repository\ArticleRepository;
 use App\Covoiturage\Model\Repository\UserRepository;
+use App\Covoiturage\Model\Repository\PanierRepository;
+
 
 class ControllerUser {
 
@@ -77,11 +79,12 @@ class ControllerUser {
 
         if(isset($_SESSION['panier']))
             $panier = $_SESSION['panier'];
-        else
-            $_SESSION['panier'] = new Panier(0);
+        else {
+            $_SESSION['panier'] = new Panier();
             $panier = $_SESSION['panier'];
-
+        }
         $panier->ajouterArticle($article,1);
+        PanierRepository::sauvegarder($panier);
         header('Location: frontController.php');
     }
 

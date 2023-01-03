@@ -35,16 +35,15 @@ class EstDansRepository {
 
     public static function sauvegarder(EstDans $lien){
         $db = DatabaseConnection::getPdo();
-        $query = $db->prepare("INSERT OR REPLACE INTO estDans (idPanier,idArticle,quantité) VALUES (:panier, :article, :quantite)");
-        $query->execute([
-            "panier" => $lien->getIdPanier(),
-            "article" => $lien->getArticleId(),
-            "quantite" => $lien->getQuantite()
-        ]);
+        $sql = "INSERT INTO estDans (idPanier, idArticle, quantité) VALUES (:idPanier, :idArticle, :quantite)";
+        $pdoStatement = $db->prepare($sql);
+        $values = array(
+            "idPanier" => $lien->getIdPanier(),
+            "idArticle" => $lien->getArticleId(),
+            "quantite" => $lien->getQuantite(),
+        );
+        $pdoStatement->execute($values);
 
-        if ($query->errorCode() !== "00000") {
-            throw new \Exception("Erreur lors de l'insertion de l'utilisateur");
-        }
     }
 
     public static function supprimerParId(int $idPanier, string $idArticle) : void {

@@ -56,10 +56,37 @@ class PanierRepository {
     }
 
     public static function sauvegarder(Panier $panier) : void {
+        if(!isset($_SESSION['user'])){
+            return;
+        }
+        // On regarde d'abord si l'utilisateur a déjà un panier ou la date de payement est null (donc pas encore payé)
+        $sql = "SELECT * FROM Panier WHERE emailUtilisateur = :mail AND payementDate IS NULL";
+        // Préparation de la requête
+        $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
+
+        $values = array(
+            "mail" => $_SESSION['user']->getMail(),
+            //nomdutag => valeur, ...
+        );
+        // On donne les valeurs et on exécute la requête
+        $pdoStatement->execute($values);
+
+        // On récupère les résultats comme précédemment
+        $panierResult= $pdoStatement->fetch();
+
+        // Si l'utilisateur a déjà un panier, on récupère son id
+        if($panierResult){
+            $panier->setIdPanier($panierResult['idPanier']);
+        }
+
+        // Sinon on laisse l'id a null pour laisser la base de données s'occuper de l'auto-incrémentation
+
+        $panier->setEmailUtilisateur($_SESSION['user']->getMail());
         $sql = "INSERT INTO Panier (idPanier, payementDate, emailUtilisateur) VALUES(:idPanier, :payement, :mail) ON DUPLICATE KEY UPDATE
 payementDate = :payement, emailUtilisateur = :mail";
         // Préparation de la requête
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
+
 
         $values = array(
             "idPanier" => $panier->getIdPanier(),
@@ -70,7 +97,13 @@ payementDate = :payement, emailUtilisateur = :mail";
         $pdoStatement->execute($values);
 
         foreach($panier->getArticles() as $dedans){
-            $dedans->sauvegarder();
+            if($panier->getIdPanier() != null){
+                $dedans->setIdPanier($panier->getIdPanier());
+            }
+            else{
+                $dedans->setIdPanier(DatabaseConnection::getPdo()->lastInsertId());
+            }
+            EstDansRepository::sauvegarder($dedans);
         }
     }
 

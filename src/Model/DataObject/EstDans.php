@@ -7,13 +7,13 @@ use App\Covoiturage\Model\Repository\ArticleRepository;
 
 class EstDans {
 
-    private int $idPanier;
+    private ?int $idPanier;
     private ?string $idArticle;
 
     private int $quantite;
 
     public function __construct(
-        int $idPanier,
+        ?int $idPanier,
         string $idArticle,
         int $quantite,
     ) {
