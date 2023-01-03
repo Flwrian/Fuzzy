@@ -3,6 +3,7 @@
 namespace App\Covoiturage\Model\DataObject;
 
 use App\Covoiturage\Model\Repository\DatabaseConnection;
+use App\Covoiturage\Model\Repository\ArticleRepository;
 
 class Panier {
 
@@ -20,6 +21,18 @@ class Panier {
         $this->idPanier = $idPanier;
         $this->date = $date;
         $this->emailUtilisateur = $emailUtilisateur;
+    }
+
+    public function __toString(): string {
+        return "Panier [idPanier=$this->idPanier, date=$this->date, emailUtilisateur=$this->emailUtilisateur]";
+    }
+
+    public function getTotal(): float {
+        $total = 0;
+        foreach ($this->articles as $estDans) {
+            $total += $estDans->getQuantite() * ArticleRepository::getArticleById($estDans->getArticleId())->getPrixBatk();
+        }
+        return $total;
     }
 
 
@@ -80,7 +93,15 @@ class Panier {
     }
 
     public function ajouterArticle(Article $article, int $quantite): void{
-        $this->articles[] = new EstDans($this->$this->idPanier, $article->getId(),$quantite);
+        // If there is already an article in the cart, we just add the quantity
+        foreach ($this->articles as $estDans) {
+            if ($estDans->getArticleId() === $article->getId()) {
+                $estDans->setQuantite($estDans->getQuantite() + $quantite);
+                return;
+            }
+        }
+        // Else, we add a new "estDans" to the cart
+        $this->articles[] = new EstDans($this->idPanier, $article->getId(), $quantite);
     }
     public function setArticles(array $articles):void
     {
