@@ -197,7 +197,7 @@ h1 > .coinIcon{
     top: 5px;
 }
 
-#formPanier>button{
+#formPanier> .button{
     border-radius: 30px;
     margin: 4px 2px;
     padding: 10px 20px;
@@ -207,7 +207,7 @@ h1 > .coinIcon{
     color: white;
 }
 
-#formPanier>button:hover{
+#formPanier> .button:hover{
     background-color: #639FAB;
 }
 .connect {
