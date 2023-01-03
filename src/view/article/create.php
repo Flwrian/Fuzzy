@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body class="bodycreate">
     <form method="get" action="frontController.php">
     <input type='hidden' name='action' value='created'>
     <fieldset>
@@ -24,8 +24,13 @@
         <input type="number" placeholder="Ex : 500" name="prixBatkArticle" id="prixBatkArticle" required/>
         </p>
         <p>
+            <label for="imageArticle">Image</label> :
+            <input type="file" id="inputFile" name="imageArticle" accept="image/png, image/jpeg"/>
+        </p>
+        <p>
         <input type="submit" value="Créer" />
         </p>
+
     </fieldset> 
     </form>
 </body>

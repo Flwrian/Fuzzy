@@ -6,6 +6,7 @@
     margin: 0 auto;
     padding: 20px;
     width: 300px;
+
 }
 
 .loginForm label {
@@ -48,4 +49,9 @@
     margin-bottom: 10px;
     padding: 10px;
     width: 100%;
+}
+
+body{
+    min-height: 100vh;
+    position: relative;
 }
