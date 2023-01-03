@@ -45,25 +45,6 @@ class ArticleRepository {
         }
     }
 
-    public static function getArticlesByPanier(int $idPanier): array {
-
-        $tab = [];
-
-        $pdoStatement = DatabaseConnection::getPdo()->prepare("SELECT a.id,nom,marque,prixBatk,ImageTile,description FROM ArticleFuzzy a JOIN estDans e ON a.id = e.idArticle WHERE e.idPanier = :idPanier");
-
-
-        $values = array(
-            "idPanier" => $idPanier,
-            //nomdutag => valeur, ...
-        );
-
-        foreach ($pdoStatement as $row) {
-            $tab[] = ArticleRepository::construire($row);
-        }
-
-        return $tab;
-    }
-
     public static function getArticlesByQuery(string $query) : array {
         $sql = "SELECT * from ArticleFuzzy WHERE nom LIKE :query OR marque LIKE :query";
         // Préparation de la requête
@@ -91,7 +72,7 @@ class ArticleRepository {
     }
 
     public static function sauvegarder(Article $article) : void {
-        $sql = "INSERT INTO ArticleFuzzy (id, nom, marque, prixBatk,description) VALUES (:idArticle, :nomArticle, :marqueArticle, :prixBatk, :description)";
+        $sql = "INSERT INTO ArticleFuzzy (id, nom, marque, prixBatk, description, ImageTile) VALUES (:idArticle, :nomArticle, :marqueArticle, :prixBatk, :description, :tile)";
         // Préparation de la requête
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
 
@@ -101,6 +82,7 @@ class ArticleRepository {
             "marqueArticle" => $article->getMarque(),
             "prixBatk" => $article->getPrixBatk(),
             "description" => $article->getDescription(),
+            "tile" => $article->getCheminImageTile(),
         );
         // On donne les valeurs et on exécute la requête
         $pdoStatement->execute($values);

@@ -9,13 +9,16 @@ class User {
     private string $username;
     private string $mail;
     private string $password;
+
+    private int $admin;
+
     private $cart = [];
 
     public function __construct(
         string $username,
         string $mail,
         string $password,
-        int $admin
+        int $admin = 0
     ) {
         $this->username = $username;
         $this->mail = $mail;
@@ -25,6 +28,22 @@ class User {
 
     public function getUsername() : string {
         return $this->username;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAdmin(): int
+    {
+        return $this->admin;
+    }
+
+    /**
+     * @param int $admin
+     */
+    public function setAdmin(int $admin): void
+    {
+        $this->admin = $admin;
     }
 
     public function getMail() : string {

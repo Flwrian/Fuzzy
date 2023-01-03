@@ -34,18 +34,44 @@ class ControllerArticle {
     }
 
     public static function created() : void {
-        $nom = $_GET['nomArticle'];
+        $nom = $_POST['nomArticle'];
         $nom = htmlspecialchars($nom);
-        $marque = $_GET['marqueArticle'];
+        $marque = $_POST['marqueArticle'];
         $marque = htmlspecialchars($marque);
-        $prixBatk = $_GET['prixBatkArticle'];
+        $prixBatk = $_POST['prixBatkArticle'];
         $prixBatk = htmlspecialchars($prixBatk);
-        $description = $_GET['descriptionArticle'];
+        $description = $_POST['descriptionArticle'];
         $description = htmlspecialchars($description);
+        $nomImage = null;
+
+        $article = new Article(null, $nom, $marque, $prixBatk);
+        $article->setDescription($description);
+
+        if(isset($_FILES['inputFile']) && is_uploaded_file($_FILES['inputFile']['tmp_name'])) {
+            $errors = array();
+            $file_name =
+            $file_tmp = $_FILES['inputFile']['tmp_name'];
+
+            $array = explode('.', $_FILES['inputFile']['name']);
+            $file_ext = strtolower(end($array));
+
+            $extensions = array("jpeg", "jpg", "png");
+
+            if (in_array($file_ext, $extensions) === false) {
+                $errors[] = "Extension interdite";
+            }
+
+            if (empty($errors) == true) {
+                $num_files = count(glob("../images/*"));
+                $nomImage = $num_files . "." . $file_ext;
+                file_put_contents("../images/" . $nomImage, file_get_contents($file_tmp));
+                $article->setCheminImageTile($nomImage);
+            } else {
+                print_r($errors);
+            }
+        }
 
 
-
-        $article = new Article(null, $nom, $marque, $prixBatk, $description);
         ArticleRepository::sauvegarder($article);
         $articles = ArticleRepository::getArticles();
 
@@ -73,5 +99,4 @@ class ControllerArticle {
         static::afficheVue('view.php', ['articles' => $articles, 'pagetitle' => 'Recherche des articles', 'cheminVueBody' => 'article/search.php', 'query' => $query]);
     }
 }
-
 ?>

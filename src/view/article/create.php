@@ -7,8 +7,7 @@
     <title>Document</title>
 </head>
 <body class="bodycreate">
-    <form method="get" action="frontController.php">
-    <input type='hidden' name='action' value='created'>
+    <form method="POST" action="frontController.php?action=created" enctype="multipart/form-data">
     <fieldset>
         <legend>Ajout d'un article / produit :</legend>
         <p>
@@ -28,14 +27,14 @@
             <input type="text" name="descriptionArticle" id="descriptionArticle" required>
         </p>
         <p>
-            <label for="imageArticle">Image</label>
-            <input type="file" id="inputFile" name="imageArticle" accept="image/png, image/jpeg"/>
+            <label for="inputFile">Image</label>
+            <input type="file" id="inputFile" name="inputFile" accept="image/png, image/jpeg"/>
         </p>
         <p>
         <input type="submit" value="Créer" />
         </p>
 
-    </fieldset> 
+    </fieldset>
     </form>
 </body>
 </html>
