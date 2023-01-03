@@ -84,4 +84,8 @@ class ControllerUser {
         $panier->ajouterArticle($article);
         header('Location: frontController.php');
     }
+
+    public static function readPanier(){
+        static::afficheVue('view.php', ['pagetitle' => 'Panier', 'cheminVueBody' => 'article/cart.php']);
+    }
 }

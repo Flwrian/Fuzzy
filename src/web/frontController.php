@@ -2,6 +2,8 @@
 /* Sans le include de User.php, on a une erreur comme quoi la classe n'est pas complète */
 include __DIR__ . '/../Model/DataObject/User.php';
 include __DIR__ . '/../Model/DataObject/Panier.php';
+include __DIR__ . '/../Model/DataObject/Article.php';
+
 
 /* On start la session */
 session_start();
