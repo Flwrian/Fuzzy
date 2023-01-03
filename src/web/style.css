@@ -178,6 +178,23 @@ footer{
     align-items: center;
 }
 
+.pack{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.pack>a{
+    text-decoration: none;
+    color: black;
+    font-family: "Open Sans", sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
+}
+
 /* Clickable cards */
 .cards a {
     text-decoration: none;
