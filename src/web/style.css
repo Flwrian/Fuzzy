@@ -25,6 +25,8 @@ main{
 .cardImage {
     height: 50%;
     max-width: 70%;
+	max-height: 70%;
+	margin: auto;
 }
 #articleDetail {
     display: flex;
