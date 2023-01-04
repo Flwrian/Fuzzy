@@ -35,7 +35,8 @@ class EstDansRepository {
 
     public static function sauvegarder(EstDans $lien){
         $db = DatabaseConnection::getPdo();
-        $sql = "INSERT INTO estDans (idPanier, idArticle, quantité) VALUES (:idPanier, :idArticle, :quantite)";
+        $sql = "INSERT INTO estDans (idPanier, idArticle, quantité) VALUES (:idPanier, :idArticle, :quantite) ON DUPLICATE KEY UPDATE
+quantité = :quantite";
         $pdoStatement = $db->prepare($sql);
         $values = array(
             "idPanier" => $lien->getIdPanier(),
