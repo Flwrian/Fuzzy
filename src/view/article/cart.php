@@ -41,16 +41,18 @@
                 $a = ArticleRepository::getArticleById(rawurlencode($a->getArticleId()));
                 $id = $a->getId();
                 // Remove from cart button
-                
-                /* Clickable cards */
+
                 echo "<a href='frontController.php?action=read&idArticle=" . $id . "'>";
                 
                 echo "<div class='card'>";
                 echo "<img src=\"../images/".$a->getCheminImageTile()."\" alt = \"presentation\" class=\"cardImage\">";
                 echo "<p>" . $a->getNom() . "</p>";
-                echo "<p>Prix unité : " . $a->getPrixBatk() . " <img src='../images/k.png' alt='Logo' class='coinIcon'></p>";
                 echo "<p>Quantité : " . $quantite . "</p>";
                 echo "<p>Prix total : " . $a->getPrixBatk() * $quantite . " <img src='../images/k.png' alt='Logo' class='coinIcon'></p>";
+                echo "<form action='frontController.php?action=removeFromCart' method='post' class='removeForm'>";
+                echo "<input type='hidden' name='idArticle' value='$id'>";
+                echo "<input type='submit' value='Retirer du panier' class='removeButton'>";
+                echo "</form>";
                 echo "</div>";
                 echo "</a>";
             }

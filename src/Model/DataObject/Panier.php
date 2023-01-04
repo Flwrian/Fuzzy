@@ -103,6 +103,15 @@ class Panier {
         // Else, we add a new "estDans" to the cart
         $this->articles[] = new EstDans($this->idPanier, $article->getId(), $quantite);
     }
+
+    public function supprimerArticle(Article $article): void{
+        foreach ($this->articles as $key => $estDans) {
+            if ($estDans->getArticleId() === $article->getId()) {
+                unset($this->articles[$key]);
+                return;
+            }
+        }
+    }
     public function setArticles(array $articles):void
     {
         $this->articles = $articles;

@@ -97,6 +97,21 @@ class ControllerUser {
         header('Location: frontController.php');
     }
 
+    public static function removeFromCart(){
+        $id = $_POST['idArticle'];
+        $article = ArticleRepository::getArticleById($id);
+
+        if(isset($_SESSION['panier']))
+            $panier = $_SESSION['panier'];
+        else {
+            $_SESSION['panier'] = new Panier();
+            $panier = $_SESSION['panier'];
+        }
+        $panier->supprimerArticle($article);
+        PanierRepository::sauvegarder($panier);
+        header('Location: frontController.php');
+    }
+
     public static function readPanier(){
         static::afficheVue('view.php', ['pagetitle' => 'Panier', 'cheminVueBody' => 'article/cart.php']);
     }
