@@ -103,6 +103,22 @@ class Panier {
         // Else, we add a new "estDans" to the cart
         $this->articles[] = new EstDans($this->idPanier, $article->getId(), $quantite);
     }
+
+    public function supprimerArticle(Article $article): void{
+        // Remove from database
+        $db = DatabaseConnection::getPDO();
+        $query = $db->prepare("DELETE FROM estDans WHERE idPanier = :idPanier AND idArticle = :idArticle");
+        $query->execute([
+            "idPanier" => $this->idPanier,
+            "idArticle" => $article->getId()
+        ]);
+        // Remove from array
+        foreach ($this->articles as $key => $estDans) {
+            if ($estDans->getArticleId() === $article->getId()) {
+                unset($this->articles[$key]);
+            }
+        }
+    }
     public function setArticles(array $articles):void
     {
         $this->articles = $articles;

@@ -81,15 +81,81 @@ class ControllerArticle {
 
     public static function delete() : void {
 
-        // If admin
+        if (!isset($_SESSION['user']) && $_SESSION['user']->getAdmin()){
+            static::error("Vous n'avez pas les droits pour supprimer un article");
+            return;
+        }
 
-
-        $id = $_GET['idArticle'];
+        $id = $_POST['idArticle'];
         $id = htmlspecialchars($id);
         $article = ArticleRepository::getArticleById($id);
         ArticleRepository::supprimerParId($article->getId());
         $articles = ArticleRepository::getArticles();
         static::afficheVue('view.php', ['article' => $article, 'pagetitle' => 'Article supprimée', 'cheminVueBody' => 'article/deleted.php', 'articles' => $articles]);
+    }
+
+    public static function edit(){
+
+        if (!isset($_SESSION['user']) && $_SESSION['user']->getAdmin()){
+            static::error("Vous n'avez pas les droits pour modifier un article");
+            return;
+        }
+        
+        $id = $_POST['idArticle'];
+        $id = htmlspecialchars($id);
+        $article = ArticleRepository::getArticleById($id);
+        static::afficheVue('view.php', ['article' => $article, 'pagetitle' => 'Edition de l\'article', 'cheminVueBody' => 'article/edit.php']);
+    }
+
+    public static function editArticle(){
+            
+            if (!isset($_SESSION['user']) && $_SESSION['user']->getAdmin()){
+                static::error("Vous n'avez pas les droits pour modifier un article");
+                return;
+            }
+    
+            $id = $_POST['idArticle'];
+            $id = htmlspecialchars($id);
+            $nom = $_POST['nom'];
+            $nom = htmlspecialchars($nom);
+            $prixBatk = $_POST['prix'];
+            $prixBatk = htmlspecialchars($prixBatk);
+            $description = $_POST['description'];
+            $description = htmlspecialchars($description);
+            $nomImage = null;
+    
+            $article = ArticleRepository::getArticleById($id);
+            $article->setNom($nom);
+            $article->setPrixBatk($prixBatk);
+            $article->setDescription($description);
+
+            if(isset($_FILES['inputFile']) && is_uploaded_file($_FILES['inputFile']['tmp_name'])) {
+                $errors = array();
+                $file_name =
+                $file_tmp = $_FILES['inputFile']['tmp_name'];
+    
+                $array = explode('.', $_FILES['inputFile']['name']);
+                $file_ext = strtolower(end($array));
+    
+                $extensions = array("jpeg", "jpg", "png");
+    
+                if (in_array($file_ext, $extensions) === false) {
+                    $errors[] = "Extension interdite";
+                }
+    
+                if (empty($errors) == true) {
+                    $num_files = count(glob("../images/*"));
+                    $nomImage = $num_files . "." . $file_ext;
+                    file_put_contents("../images/" . $nomImage, file_get_contents($file_tmp));
+                    $article->setCheminImageTile($nomImage);
+                } else {
+                    print_r($errors);
+                }
+            }
+
+            ArticleRepository::sauvegarder($article);
+            $articles = ArticleRepository::getArticles();
+            static::afficheVue('view.php', ['article' => $article, 'pagetitle' => 'Article modifié', 'cheminVueBody' => 'article/list.php', 'articles' => $articles]);
     }
 
     public static function error(string $errorMessage = "") : void {
