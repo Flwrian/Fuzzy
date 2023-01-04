@@ -157,7 +157,7 @@ footer{
 
 .card {
     border-radius: 5px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.395);
     margin: 10px;
     width: 300px;
     height: 300px;
@@ -167,6 +167,10 @@ footer{
     align-items: center;
     padding: 10px;
     background: linear-gradient(rgb(238, 202, 102), rgb(241, 151, 87));
+}
+
+.card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.795);
 }
 
 .cards {
