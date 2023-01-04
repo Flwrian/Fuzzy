@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+
     <!-- Login form -->
     <form action="frontController.php?action=authenticate" method="post" class="loginForm">
         <label for="email">Email</label>
