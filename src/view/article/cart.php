@@ -47,12 +47,10 @@
                 
                 echo "<div class='card'>";
                 echo "<img src=\"../images/".$a->getCheminImageTile()."\" alt = \"presentation\" class=\"cardImage\">";
-                echo "<p>Nom : " . $a->getNom() . "</p>";
-                echo "<p>Marque : " . $a->getMarque() . "</p>";
-                echo "<p>Prix unité : " . $a->getPrixBatk() . "</p>";
+                echo "<p>" . $a->getNom() . "</p>";
+                echo "<p>Prix unité : " . $a->getPrixBatk() . " <img src='../images/k.png' alt='Logo' class='coinIcon'></p>";
                 echo "<p>Quantité : " . $quantite . "</p>";
-                echo "<p>Prix total : " . $a->getPrixBatk() * $quantite . "</p>";
-                echo "<img src='../images/k.png' alt='Logo' class='coinIcon'>";
+                echo "<p>Prix total : " . $a->getPrixBatk() * $quantite . " <img src='../images/k.png' alt='Logo' class='coinIcon'></p>";
                 echo "</div>";
                 echo "</a>";
             }

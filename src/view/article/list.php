@@ -16,8 +16,7 @@
             echo "<div class='card'>";
             echo "<img src=\"../images/".$a->getCheminImageTile()."\" alt = \"presentation\" class=\"cardImage\">";
             echo "<p>" . $a->getNom() . "</p>";
-            echo "<p>" . $a->getPrixBatk() . " BATK</p>";
-            echo "<img src='../images/k.png' alt='Logo' class='coinIcon'>";
+            echo "<p>" . $a->getPrixBatk() . " <img src='../images/k.png' alt='Logo' class='coinIcon'></p>";
             echo "</div>";
             echo "</a>";
         }
