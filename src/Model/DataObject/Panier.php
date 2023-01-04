@@ -105,10 +105,17 @@ class Panier {
     }
 
     public function supprimerArticle(Article $article): void{
+        // Remove from database
+        $db = DatabaseConnection::getPDO();
+        $query = $db->prepare("DELETE FROM estDans WHERE idPanier = :idPanier AND idArticle = :idArticle");
+        $query->execute([
+            "idPanier" => $this->idPanier,
+            "idArticle" => $article->getId()
+        ]);
+        // Remove from array
         foreach ($this->articles as $key => $estDans) {
             if ($estDans->getArticleId() === $article->getId()) {
                 unset($this->articles[$key]);
-                return;
             }
         }
     }
