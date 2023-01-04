@@ -310,6 +310,22 @@ h1 > .coinIcon{
     padding-right: 10px;
 }
 
+#panelAdmin{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+#panelAdmin>.adminButton{
+    border-radius: 30px;
+    margin: 4px 2px;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #101D42;
+    cursor: pointer;
+    color: white;
+}
+
 .adminImage {
     width: 58px;
     height: 58px;
