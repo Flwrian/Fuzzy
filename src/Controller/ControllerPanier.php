@@ -20,26 +20,44 @@ class ControllerPanier {
         static::afficheVue('view.php', ['articles' => $articles, 'pagetitle' => 'Liste des articles', 'cheminVueBody' => 'article/list.php']);
     }
 
-    public static function pay():void {
+    public static function pay(): void {
         if(!isset($_SESSION['user'])){
             self::error("Connectez vous d'abord");
+            return;
         }
-        else if(isset($_GET['idPanier'])){
-            $panier = PanierRepository::getPanierById($_GET['idPanier']);
-            if($panier != null && $panier->getEmailUtilisateur() == $_SESSION['user'] && $panier->getDate() == null){
-                $panier->setDate(date());
-
-                static::afficheVue('view.php',['pagetitle' => 'achat validé','articles' => ArticleRepository::getArticles(),'cheminVueBody' => 'article/achat.php']);
-            }
-            else{
-                self::error("Panier inexistant");
-            }
+        $articles = ArticleRepository::getArticles();
+        $p = PanierRepository::getPanierByMail($_SESSION['user']->getMail());
+        if(isset($_SESSION['user']) && $p != null){
+            $p->setDate(date("Y-m-d"));
+            PanierRepository::sauvegarder($p);
+            unset($_SESSION['panier']);
+            static::afficheVue('view.php', ['pagetitle' => 'Commande passé', 'cheminVueBody' => 'article/achat.php', 'articles' => $articles]);
         }
-        else{
-            self::error("Panier non indiqué");
+        else {
+            static::error("aucun panier");
         }
-
     }
+
+    // public static function pay():void {
+    //     if(!isset($_SESSION['user'])){
+    //         self::error("Connectez vous d'abord");
+    //     }
+    //     else if(isset($_GET['idPanier'])){
+    //         $panier = PanierRepository::getPanierById($_GET['idPanier']);
+    //         if($panier != null && $panier->getEmailUtilisateur() == $_SESSION['user'] && $panier->getDate() == null){
+    //             $panier->setDate(date());
+
+    //             static::afficheVue('view.php',['pagetitle' => 'achat validé','articles' => ArticleRepository::getArticles(),'cheminVueBody' => 'article/achat.php']);
+    //         }
+    //         else{
+    //             self::error("Panier inexistant");
+    //         }
+    //     }
+    //     else{
+    //         self::error("Panier non indiqué");
+    //     }
+
+    // }
 
 
     public static function error(string $errorMessage = "") : void {

@@ -101,19 +101,20 @@ class ControllerArticle {
         $articles = ArticleRepository::getArticles();
         static::afficheVue('view.php', ['article' => $article, 'pagetitle' => 'Article supprimée', 'cheminVueBody' => 'article/deleted.php', 'articles' => $articles]);
     }
-    public static function pay(): void {
-        $articles = ArticleRepository::getArticles();
-        $p = PanierRepository::getPanierByMail($_SESSION['user']->getMail());
-        if(isset($_SESSION['user']) && $p != null){
-            $p->setDate(date("Y-m-d"));
-            PanierRepository::sauvegarder($p);
-            unset($_SESSION['panier']);
-            static::afficheVue('view.php', ['pagetitle' => 'Commande passé', 'cheminVueBody' => 'article/achat.php', 'articles' => $articles]);
-        }
-        else {
-            static::error("aucun panier");
-        }
-    }
+    
+    // public static function pay(): void {
+    //     $articles = ArticleRepository::getArticles();
+    //     $p = PanierRepository::getPanierByMail($_SESSION['user']->getMail());
+    //     if(isset($_SESSION['user']) && $p != null){
+    //         $p->setDate(date("Y-m-d"));
+    //         PanierRepository::sauvegarder($p);
+    //         unset($_SESSION['panier']);
+    //         static::afficheVue('view.php', ['pagetitle' => 'Commande passé', 'cheminVueBody' => 'article/achat.php', 'articles' => $articles]);
+    //     }
+    //     else {
+    //         static::error("aucun panier");
+    //     }
+    // }
     public static function edit(){
 
         if (!isset($_SESSION['user']) || $_SESSION['user']->getAdmin() != 1){
