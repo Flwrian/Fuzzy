@@ -22,6 +22,22 @@ main{
     margin-right: 100px;
 }
 
+#panelAdmin{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+#panelAdmin>.adminButton{
+    border-radius: 30px;
+    margin: 4px 2px;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #101D42;
+    cursor: pointer;
+    color: white;
+}
+
 .cardImage {
     height: 50%;
     max-width: 70%;
@@ -179,6 +195,7 @@ footer{
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
+    margin: auto;
 }
 
 .pack{
