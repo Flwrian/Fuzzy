@@ -77,6 +77,7 @@
                 <?php
                 if (isset($_SESSION['user']) && $_SESSION['user']->getAdmin()){
                     echo "<a href=\"frontController.php?action=admin\" class=\"adminButton\">
+                    <img src=\"../images/admin.png\" alt=\"Administration\" class=\"adminImage\">
                     <span>Administration</span>
                 </a>";
                 }
