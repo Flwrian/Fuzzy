@@ -32,10 +32,18 @@ class ControllerArticle {
 
 
     public static function create() : void {
+        if (!isset($_SESSION['user']) || $_SESSION['user']->getAdmin() != 1){
+            static::error("Vous n'avez pas les droits pour créer un article");
+            return;
+        }
         static::afficheVue('view.php', ['pagetitle' => 'Création de la page', 'cheminVueBody' => 'article/create.php']);
     }
 
     public static function created() : void {
+        if (!isset($_SESSION['user']) || $_SESSION['user']->getAdmin() != 1){
+            static::error("Vous n'avez pas les droits pour créer un article");
+            return;
+        }
         $nom = $_POST['nomArticle'];
         $nom = htmlspecialchars($nom);
         $marque = $_POST['marqueArticle'];
@@ -82,11 +90,10 @@ class ControllerArticle {
 
     public static function delete() : void {
 
-        if (!isset($_SESSION['user']) && $_SESSION['user']->getAdmin()){
+        if (!isset($_SESSION['user']) || $_SESSION['user']->getAdmin() != 1){
             static::error("Vous n'avez pas les droits pour supprimer un article");
             return;
         }
-
         $id = $_POST['idArticle'];
         $id = htmlspecialchars($id);
         $article = ArticleRepository::getArticleById($id);
@@ -109,7 +116,7 @@ class ControllerArticle {
     }
     public static function edit(){
 
-        if (!isset($_SESSION['user']) && $_SESSION['user']->getAdmin()){
+        if (!isset($_SESSION['user']) || $_SESSION['user']->getAdmin() != 1){
             static::error("Vous n'avez pas les droits pour modifier un article");
             return;
         }
@@ -122,10 +129,10 @@ class ControllerArticle {
 
     public static function editArticle(){
 
-            if (!isset($_SESSION['user']) && $_SESSION['user']->getAdmin()){
-                static::error("Vous n'avez pas les droits pour modifier un article");
-                return;
-            }
+        if (!isset($_SESSION['user']) || $_SESSION['user']->getAdmin() != 1){
+            static::error("Vous n'avez pas les droits pour modifier un article");
+            return;
+        }
 
             $id = $_POST['idArticle'];
             $id = htmlspecialchars($id);
