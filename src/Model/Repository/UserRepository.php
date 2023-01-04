@@ -25,6 +25,21 @@ class UserRepository {
         return null;
     }
 
+    public static function getUsers(): array{
+
+        $tab = [];
+
+        $pdoStatement = DatabaseConnection::getPdo()->query("SELECT * FROM UtilisateurFuzzy");
+
+        foreach ($pdoStatement as $row) {
+            $tab[] = static::construire($row);
+        }
+
+        return $tab;
+    }
+    public static function construire($row) : User {
+        return new User($row['mail'],$row['password'],$row['admin']);
+    }
     public static function sauvegarder(User $user) : void {
         $db = DatabaseConnection::getPdo();
         $query = $db->prepare("INSERT INTO UtilisateurFuzzy (mail, password, admin) VALUES (:mail, :password, :admin)");

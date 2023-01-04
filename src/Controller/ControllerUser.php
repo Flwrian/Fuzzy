@@ -15,7 +15,7 @@ class ControllerUser {
         extract($parametres); // Crée des variables à partir du tableau $parametres
         require "../view/$cheminVue"; // Charge la vue
      }
-    
+
     public static function connection(){
         static::afficheVue('view.php', ['pagetitle' => 'Connexion', 'cheminVueBody' => 'article/login.php']);
     }
@@ -61,13 +61,25 @@ class ControllerUser {
 
         $user = new User($mail, $password);
 
-        UserRepository::sauvegarder($user);
+        $existeDeja = false;
+        foreach (UserRepository::getUsers() as $u){
+            if($u->getMail() == $user->getMail()){
+                $existeDeja = true;
+                break;
+            }
+        }
 
-        /* On setup la session */
-        $_SESSION['user'] = $user;
+        if(!$existeDeja){
+            UserRepository::sauvegarder($user);
 
-        /* On redirige le visiteur vers la page d'accueil */
-        header('Location: frontController.php');
+            /* On setup la session */
+            $_SESSION['user'] = $user;
+
+            /* On redirige le visiteur vers la page d'accueil */
+            header('Location: frontController.php');
+        }
+        self::afficheVue('view.php',['pagetitle' => 'Erreur','cheminVueBody' => 'article/error.php', 'errorMessage' => 'Utilisateur deja existant']);
+
     }
 
     public static function addPanier(){
