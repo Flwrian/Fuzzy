@@ -8,14 +8,14 @@ use App\Covoiturage\Model\Repository\ArticleRepository;
 class Panier {
 
     private ?int $idPanier;
-    private ?string $date;
+    private mixed $date;
     private ?string $emailUtilisateur;
 
     private array $articles = []; // /!\ doit contenir des "estDans"
 
     public function __construct(
         int $idPanier = null,
-        string $date = null,
+        $date = null,
         string $emailUtilisateur = null
     ) {
         $this->idPanier = $idPanier;
@@ -55,7 +55,7 @@ class Panier {
     /**
      * @return string|null
      */
-    public function getDate(): ?string
+    public function getDate(): mixed
     {
         return $this->date;
     }
@@ -63,7 +63,7 @@ class Panier {
     /**
      * @param string|null $date
      */
-    public function setDate(?string $date): void
+    public function setDate(mixed$date): void
     {
         $this->date = $date;
     }
@@ -95,7 +95,7 @@ class Panier {
     public function ajouterArticle(Article $article, int $quantite): void{
         // If there is already an article in the cart, we just add the quantity
         foreach ($this->articles as $estDans) {
-            if ($estDans->getArticleId() === $article->getId()) {
+            if ($estDans->getArticleId() == $article->getId()) {
                 $estDans->setQuantite($estDans->getQuantite() + $quantite);
                 return;
             }

@@ -60,4 +60,16 @@ quantité = :quantite";
         $pdoStatement->execute($values);
     }
 
+    public static function supprimerParPanier(int $idPanier) : void {
+        $sql = "DELETE FROM estDans WHERE idPanier = :idPanier";
+        // Préparation de la requête
+        $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
+
+        $values = array(
+            "idPanier" => $idPanier,
+        );
+        // On donne les valeurs et on exécute la requête
+        $pdoStatement->execute($values);
+    }
+
 }

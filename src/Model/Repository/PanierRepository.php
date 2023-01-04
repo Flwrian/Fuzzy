@@ -52,7 +52,7 @@ class PanierRepository {
     }
 
     public static function getPanierByMail(string $mail) : Panier | null {
-        $sql = "SELECT * from Panier WHERE emailUtilisateur = :mail";
+        $sql = "SELECT * from Panier WHERE emailUtilisateur = :mail && payementDate IS NULL";
         // Préparation de la requête
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
 
@@ -78,20 +78,21 @@ class PanierRepository {
     }
 
     public static function construire($row) : Panier {
-        return new Panier($row['idPanier'], $row['payementDate'], $row['emailUtilisateur']);
+        $p = new Panier($row['idPanier'], $row['payementDate'], $row['emailUtilisateur']);
+        $articles = EstDansRepository::getArticlesByPanier($p->getIdPanier());
+        if($articles != null){
+            $p->setArticles($articles);
+        }
+        return $p;
     }
 
-    public static function sauvegarder(Panier $panier) : void {
-        if(!isset($_SESSION['user'])){
-            return;
-        }
-        // On regarde d'abord si l'utilisateur a déjà un panier ou la date de payement est null (donc pas encore payé)
+    public static function getPanierFromEmail(string $mail): Panier | null{
         $sql = "SELECT * FROM Panier WHERE emailUtilisateur = :mail AND payementDate IS NULL";
         // Préparation de la requête
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
 
         $values = array(
-            "mail" => $_SESSION['user']->getMail(),
+            "mail" => $mail,
             //nomdutag => valeur, ...
         );
         // On donne les valeurs et on exécute la requête
@@ -99,37 +100,39 @@ class PanierRepository {
 
         // On récupère les résultats comme précédemment
         $panierResult= $pdoStatement->fetch();
-
-        // Si l'utilisateur a déjà un panier, on récupère son id
         if($panierResult){
-            $panier->setIdPanier($panierResult['idPanier']);
+            return static::construire($panierResult);
+        }
+        return null;
+    }
+
+    public static function sauvegarder(Panier $panier) : void {
+        if(!isset($_SESSION['user'])){
+            return;
         }
 
-        // Sinon on laisse l'id a null pour laisser la base de données s'occuper de l'auto-incrémentation
-
-        $panier->setEmailUtilisateur($_SESSION['user']->getMail());
-        $sql = "INSERT INTO Panier (idPanier, payementDate, emailUtilisateur) VALUES(:idPanier, :payement, :mail) ON DUPLICATE KEY UPDATE
-payementDate = :payement, emailUtilisateur = :mail";
-        // Préparation de la requête
+        $sql = "INSERT INTO Panier(idPanier,payementDate, emailUtilisateur) VALUES(:idPanier,:dat,:email) ON DUPLICATE KEY UPDATE payementDate  = :dat, emailUtilisateur = :email";
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
-
 
         $values = array(
             "idPanier" => $panier->getIdPanier(),
-            "payement" => $panier->getDate(),
-            "mail" => $panier->getEmailUtilisateur(),
+            "dat" => $panier->getDate(),
+            "email" => $panier->getEmailUtilisateur(),
         );
+
         // On donne les valeurs et on exécute la requête
         $pdoStatement->execute($values);
 
-        foreach($panier->getArticles() as $dedans){
-            if($panier->getIdPanier() != null){
-                $dedans->setIdPanier($panier->getIdPanier());
+        $distant = static::getPanierFromEmail($_SESSION['user']->getMail());
+
+        // Si l'utilisateur a déjà un panier, on récupère son id et on ecrase son panier
+        if($distant != null){
+            $panier->setIdPanier($distant->getIdPanier());
+            EstDansRepository::supprimerParPanier($panier->getIdPanier());
+            foreach ($panier->getArticles() as $article) {
+                $article->setIdPanier($panier->getIdPanier());
+                EstDansRepository::sauvegarder($article);
             }
-            else{
-                $dedans->setIdPanier(DatabaseConnection::getPdo()->lastInsertId());
-            }
-            EstDansRepository::sauvegarder($dedans);
         }
     }
 
