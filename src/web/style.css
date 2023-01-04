@@ -171,6 +171,8 @@ footer{
 
 .card:hover {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.795);
+    transition: all 0.3s ease-in-out;
+    transform: scale(1.05);
 }
 
 .cards {
@@ -203,6 +205,10 @@ footer{
 .cards a {
     text-decoration: none;
     color: black;
+}
+
+.cards a:hover {
+    color: #101D42;
 }
 
 .coinIcon {
@@ -353,6 +359,10 @@ h1 > .coinIcon{
 .deleteImage {
     width: 20px;
     height: 20px;
+}
+
+.deleteImage:hover {
+    transform: scale(1.1);
 }
 
 
