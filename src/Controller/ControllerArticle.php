@@ -4,6 +4,7 @@ namespace App\Covoiturage\Controller;
 use App\Covoiturage\Model\DataObject\Article;
 use App\Covoiturage\Model\DataObject\Panier;
 use App\Covoiturage\Model\Repository\ArticleRepository;
+use App\Covoiturage\Model\Repository\PanierRepository;
 use App\Covoiturage\Model\Repository\UserRepository;
 
 class ControllerArticle {
@@ -93,14 +94,26 @@ class ControllerArticle {
         $articles = ArticleRepository::getArticles();
         static::afficheVue('view.php', ['article' => $article, 'pagetitle' => 'Article supprimée', 'cheminVueBody' => 'article/deleted.php', 'articles' => $articles]);
     }
-
+    public static function pay(): void {
+        $articles = ArticleRepository::getArticles();
+        $p = PanierRepository::getPanierByMail($_SESSION['user']->getMail());
+        if(isset($_SESSION['user']) && $p != null){
+            $p->setDate(date("Y-m-d"));
+            PanierRepository::sauvegarder($p);
+            unset($_SESSION['panier']);
+            static::afficheVue('view.php', ['pagetitle' => 'Commande passé', 'cheminVueBody' => 'article/achat.php', 'articles' => $articles]);
+        }
+        else {
+            static::error("aucun panier");
+        }
+    }
     public static function edit(){
 
         if (!isset($_SESSION['user']) && $_SESSION['user']->getAdmin()){
             static::error("Vous n'avez pas les droits pour modifier un article");
             return;
         }
-        
+
         $id = $_POST['idArticle'];
         $id = htmlspecialchars($id);
         $article = ArticleRepository::getArticleById($id);
@@ -108,12 +121,12 @@ class ControllerArticle {
     }
 
     public static function editArticle(){
-            
+
             if (!isset($_SESSION['user']) && $_SESSION['user']->getAdmin()){
                 static::error("Vous n'avez pas les droits pour modifier un article");
                 return;
             }
-    
+
             $id = $_POST['idArticle'];
             $id = htmlspecialchars($id);
             $nom = $_POST['nom'];
@@ -123,7 +136,7 @@ class ControllerArticle {
             $description = $_POST['description'];
             $description = htmlspecialchars($description);
             $nomImage = null;
-    
+
             $article = ArticleRepository::getArticleById($id);
             $article->setNom($nom);
             $article->setPrixBatk($prixBatk);
@@ -131,18 +144,17 @@ class ControllerArticle {
 
             if(isset($_FILES['inputFile']) && is_uploaded_file($_FILES['inputFile']['tmp_name'])) {
                 $errors = array();
-                $file_name =
                 $file_tmp = $_FILES['inputFile']['tmp_name'];
-    
+
                 $array = explode('.', $_FILES['inputFile']['name']);
                 $file_ext = strtolower(end($array));
-    
+
                 $extensions = array("jpeg", "jpg", "png");
-    
+
                 if (in_array($file_ext, $extensions) === false) {
                     $errors[] = "Extension interdite";
                 }
-    
+
                 if (empty($errors) == true) {
                     $num_files = count(glob("../images/*"));
                     $nomImage = $num_files . "." . $file_ext;

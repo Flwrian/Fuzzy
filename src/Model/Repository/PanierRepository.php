@@ -137,7 +137,7 @@ class PanierRepository {
     }
 
     public static function supprimerParId(int $idPanier) : void {
-        $sql = "DELETE FROM Panier WHERE id = :idPanier";
+        $sql = "DELETE FROM Panier WHERE idPanier = :idPanier";
         // Préparation de la requête
         $pdoStatement = DatabaseConnection::getPdo()->prepare($sql);
 

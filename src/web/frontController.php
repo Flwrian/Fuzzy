@@ -1,5 +1,6 @@
 <?php
 
+use App\Covoiturage\Controller\ControllerPanier;
 use App\Covoiturage\Lib\Psr4AutoloaderClass;
 require_once __DIR__ . '/../Lib/Psr4AutoloaderClass.php';
 // instantiate the loader
@@ -41,6 +42,9 @@ if(is_callable(array(ControllerArticle::class, $action))){
 else if (is_callable(array(ControllerUser::class, $action))){
     // We call the action
     ControllerUser::$action();
+}
+else if(is_callable(array(ControllerPanier::class,$action))){
+    ControllerPanier::$action();
 }
 else{
     // We call the error method of ControllerArticle because the action is not valid

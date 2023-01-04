@@ -38,6 +38,10 @@ class ControllerUser {
             /* On setup la session */
             $_SESSION['user'] = $user;
             if(isset($_SESSION['panier'])){
+                $p = PanierRepository::getPanierByMail($user->getMail());
+                if ($p != null){
+                    PanierRepository::supprimerParId($p->getIdPanier());
+                }
                 $_SESSION['panier']->setEmailUtilisateur($user->getMail());
                 PanierRepository::sauvegarder($_SESSION['panier']);
             }
@@ -89,13 +93,16 @@ class ControllerUser {
     public static function addPanier(){
         $id = $_POST['idArticle'];
         $article = ArticleRepository::getArticleById($id);
-
-        if(isset($_SESSION['panier']))
-            $panier = $_SESSION['panier'];
-        else {
-            $_SESSION['panier'] = new Panier();
-            $panier = $_SESSION['panier'];
+        if(!isset($_SESSION['panier'])){
+                if(isset($_SESSION['user'])){
+                    $_SESSION['panier'] = new Panier(null,null,$_SESSION['user']->getMail());
+                }
+                else{
+                    $_SESSION['panier'] = new Panier();
+                }
         }
+
+        $panier = $_SESSION['panier'];
         $panier->ajouterArticle($article,1);
         PanierRepository::sauvegarder($panier);
         header('Location: frontController.php');
