@@ -350,7 +350,10 @@ h1 > .coinIcon{
     scale: 0.75;
 }
 
-
+.deleteImage {
+    width: 20px;
+    height: 20px;
+}
 
 
 
