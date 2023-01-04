@@ -226,6 +226,9 @@ footer{
     height: 25px;
     border-radius: 50%;
     border: 1px solid black;
+    position: relative;
+    top: 5px;
+    
 }
 
 nav .search {
