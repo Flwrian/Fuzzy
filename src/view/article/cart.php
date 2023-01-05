@@ -27,6 +27,12 @@
         if(isset($_SESSION['panier'])){
             $panier = $_SESSION['panier'];
             
+            // Check if empty
+            if($panier->getArticles() == null){
+                echo "<p>Votre panier est vide</p>";
+                return;
+            }
+            
 
             // Echo pay button
             $total = $panier->getTotal();

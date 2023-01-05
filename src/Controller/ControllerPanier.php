@@ -21,27 +21,35 @@ class ControllerPanier {
     }
 
     public static function pay(): void {
-        if(!isset($_SESSION['user'])){
-            self::error("Connectez vous d'abord");
-            return;
-        }
-        $articles = ArticleRepository::getArticles();
-        $p = PanierRepository::getPanierByMail($_SESSION['user']->getMail());
-        if(isset($_SESSION['user']) && $p != null){
-            $p->setDate(date("Y-m-d"));
-            PanierRepository::sauvegarder($p);
-            unset($_SESSION['panier']);
-            static::afficheVue('view.php', ['pagetitle' => 'Commande passé', 'cheminVueBody' => 'article/achat.php', 'articles' => $articles]);
-        }
-        else {
-            static::error("aucun panier");
-        }
+    // check if the user is connected
+    if(!isset($_SESSION['user'])){
+        self::error("Connectez vous d'abord");
+        return;
     }
+    // get all the articles
+    $articles = ArticleRepository::getArticles();
+    // get the user's panier
+    $p = PanierRepository::getPanierByMail($_SESSION['user']->getMail());
+    // if the panier is not null (it should not)
+    if(isset($_SESSION['user']) && $p != null){
+        // set the date of the panier
+        $p->setDate(date("Y-m-d"));
+        // save the panier
+        PanierRepository::sauvegarder($p);
+        // unset the panier session
+        unset($_SESSION['panier']);
+        // show the view
+        static::afficheVue('view.php', ['pagetitle' => 'Commande passé', 'cheminVueBody' => 'article/achat.php', 'articles' => $articles]);
+    }
+    else {
+        static::error("aucun panier");
+    }
+}
 
     public static function removeFromCart(){
-        $panier = $_SESSION['panier'];
-        $articles = ArticleRepository::getArticles();
         if(isset($_POST['idArticle'])){
+            $panier = $_SESSION['panier'];
+            $articles = ArticleRepository::getArticles();
             $panier->supprimerArticle(ArticleRepository::getArticleById($_POST['idArticle']));
             PanierRepository::sauvegarder($panier);
             header('Location: frontController.php');
