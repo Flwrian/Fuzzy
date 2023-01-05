@@ -38,6 +38,19 @@ class ControllerPanier {
         }
     }
 
+    public static function removeFromCart(){
+        $panier = $_SESSION['panier'];
+        $articles = ArticleRepository::getArticles();
+        if(isset($_POST['idArticle'])){
+            $panier->supprimerArticle(ArticleRepository::getArticleById($_POST['idArticle']));
+            PanierRepository::sauvegarder($panier);
+            header('Location: frontController.php');
+        }
+        else{
+            static::error("aucun article");
+        }
+    }
+
     // public static function pay():void {
     //     if(!isset($_SESSION['user'])){
     //         self::error("Connectez vous d'abord");
