@@ -10,7 +10,7 @@ class Conf {
         //
         // ou webinfo.iutmontp.univ-montp2.fr
         // pour accéder à webinfo depuis l'extérieur
-        'hostname' => 'webinfo.iutmontp.univ-montp2.fr',
+        'hostname' => '',
         // A l'IUT, vous avez une BDD nommee comme votre login
         // Sur votre machine, vous devrez creer une BDD
         'database' => 'ducheynee',
@@ -19,7 +19,7 @@ class Conf {
         'login' => 'ducheynee',
         // A l'IUT, c'est votre mdp (INE par defaut)
         // Sur votre machine personelle, vous avez creez ce mdp a l'installation
-        'password' => '[!AQnHjFP8r8MXQH'
+        'password' => ''
     );
 
     static public function getLogin() : string {
